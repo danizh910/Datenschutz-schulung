@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { users } from '@/lib/schema';
 
 export async function POST(req: NextRequest) {
@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Name muss mindestens 2 Zeichen lang sein.' }, { status: 400 });
     }
 
+    const db = getDb();
     const [user] = await db.insert(users).values({ name: name.trim() }).returning();
 
     return NextResponse.json({ userId: user.id, name: user.name });

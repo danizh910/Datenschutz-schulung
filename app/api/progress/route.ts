@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { progress } from '@/lib/schema';
 import { eq, and } from 'drizzle-orm';
 
@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'userId fehlt.' }, { status: 400 });
     }
 
+    const db = getDb();
     const rows = await db
       .select()
       .from(progress)
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Fehlende Parameter.' }, { status: 400 });
     }
 
+    const db = getDb();
     const existing = await db
       .select()
       .from(progress)

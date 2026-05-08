@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { quizAnswers } from '@/lib/schema';
 
 export async function POST(req: NextRequest) {
@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Fehlende Parameter.' }, { status: 400 });
     }
 
+    const db = getDb();
     await db.insert(quizAnswers).values({
       userId,
       moduleId,
