@@ -1,5 +1,9 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import Waechter from './Waechter';
+import { ClayButton } from './Surface';
+
 type Props = {
   isCorrect: boolean;
   explanation: string;
@@ -7,40 +11,84 @@ type Props = {
   nextLabel?: string;
 };
 
-export default function FeedbackBanner({ isCorrect, explanation, onNext, nextLabel = 'Weiter →' }: Props) {
+export default function FeedbackBanner({
+  isCorrect,
+  explanation,
+  onNext,
+  nextLabel = 'Weiter →',
+}: Props) {
   return (
-    <div
-      className="rounded-xl p-5 border-2 flex flex-col gap-4"
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       style={{
-        backgroundColor: isCorrect ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
-        borderColor: isCorrect ? '#22c55e' : '#ef4444',
+        borderRadius: '24px 24px 0 0',
+        padding: '20px 20px 24px',
+        background: isCorrect ? 'var(--green-soft)' : 'var(--red-soft)',
+        border: `2px solid ${isCorrect ? 'var(--green)' : 'var(--red)'}`,
+        borderBottom: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 16,
       }}
     >
-      <div className="flex items-start gap-3">
-        <span className="text-2xl flex-shrink-0">{isCorrect ? '✅' : '❌'}</span>
-        <div>
-          <p
-            className="font-bold text-base mb-1"
-            style={{ color: isCorrect ? '#22c55e' : '#ef4444' }}
-          >
-            {isCorrect ? 'Richtig! Super gemacht.' : 'Nicht ganz — hier ist die Erklärung:'}
-          </p>
-          <p className="text-sm leading-relaxed" style={{ color: '#f1f5f9' }}>
+      <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+        <motion.div
+          animate={isCorrect
+            ? { y: [0, -8, 0] }
+            : { x: [0, -4, 4, -3, 3, 0] }}
+          transition={isCorrect
+            ? { duration: 2, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 0.5 }}
+        >
+          <Waechter mood={isCorrect ? 'celebrate' : 'sad'} size={64}/>
+        </motion.div>
+        <div style={{ flex: 1 }}>
+          <div style={{
+            fontSize: 18,
+            fontWeight: 800,
+            color: isCorrect ? 'var(--green-deep)' : 'var(--red)',
+            letterSpacing: '-0.2px',
+            marginBottom: 4,
+          }}>
+            {isCorrect ? 'Korrekt.' : 'Leider falsch.'}
+          </div>
+          {isCorrect && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 4,
+                fontSize: 12, fontWeight: 700,
+                color: '#fff',
+                background: 'var(--green)',
+                padding: '3px 10px', borderRadius: 999,
+                marginBottom: 6,
+              }}
+            >
+              ⚡ +20 XP
+            </motion.div>
+          )}
+          <p style={{
+            fontSize: 13,
+            lineHeight: 1.5,
+            color: isCorrect ? 'var(--green-ink)' : 'var(--red-ink)',
+            margin: 0,
+          }}>
             {explanation}
           </p>
         </div>
       </div>
-      <button
+
+      <ClayButton
+        variant={isCorrect ? 'success' : 'primary'}
+        fullWidth
         onClick={onNext}
-        className="w-full py-3 rounded-xl font-semibold text-base cursor-pointer transition-all duration-200 active:scale-95"
-        style={{
-          backgroundColor: isCorrect ? '#22c55e' : '#3b82f6',
-          color: '#ffffff',
-          minHeight: '48px',
-        }}
       >
         {nextLabel}
-      </button>
-    </div>
+      </ClayButton>
+    </motion.div>
   );
 }

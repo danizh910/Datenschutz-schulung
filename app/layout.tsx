@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Datenschutz-Schulung | MS Direct Group',
@@ -13,7 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className="h-full">
-      <body className="min-h-full flex flex-col" style={{ backgroundColor: '#0f1117', color: '#f1f5f9' }}>
+      <body className={`${plusJakarta.variable} min-h-full flex flex-col`}
+            style={{ fontFamily: 'var(--font-plus-jakarta, "Plus Jakarta Sans"), system-ui, sans-serif' }}>
         {children}
       </body>
     </html>
