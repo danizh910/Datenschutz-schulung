@@ -3,13 +3,15 @@
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, RefreshCw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, RefreshCw, Star } from 'lucide-react';
 import { modules } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
 import FeedbackBanner from '@/components/FeedbackBanner';
 import AnswerCard from '@/components/AnswerCard';
 import Surface, { ClayButton, Pill } from '@/components/Surface';
 import Waechter from '@/components/Waechter';
+import VideoEmbed from '@/components/VideoEmbed';
+import InfoBox from '@/components/InfoBox';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 
 type Phase = 'learn' | 'quiz' | 'done';
@@ -23,8 +25,9 @@ type QuizState = {
 };
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
+const TOTAL_MODULES = modules.length;
 
-export default function ModulePage({ params }: { params: Promise<{ id: string }> }) {
+export default function ModulPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
   const isDesktop = useIsDesktop();
@@ -33,6 +36,7 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
   const mod = modules.find((m) => m.id === moduleId);
 
   const [userId, setUserId] = useState<string | null>(null);
+  const [completedCount, setCompletedCount] = useState(0);
   const [phase, setPhase] = useState<Phase>(mod?.learnContent.length === 0 ? 'quiz' : 'learn');
   const [learnIndex, setLearnIndex] = useState(0);
   const [quizState, setQuizState] = useState<QuizState>({
@@ -48,6 +52,16 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
     const uid = localStorage.getItem('userId');
     if (!uid) { router.replace('/'); return; }
     setUserId(uid);
+
+    fetch(`/api/progress?userId=${uid}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.progress) {
+          const count = (data.progress as { completed: boolean }[]).filter((p) => p.completed).length;
+          setCompletedCount(count);
+        }
+      })
+      .catch(() => {});
   }, [router]);
 
   if (!mod) {
@@ -61,6 +75,7 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
   const totalLearn = mod.learnContent.length;
   const totalQuiz = mod.quiz.length;
   const currentQuestion = mod.quiz[quizState.questionIndex];
+  const currentLearn = mod.learnContent[learnIndex];
 
   const handleToggleAnswer = (idx: number) => {
     if (quizState.answered) return;
@@ -154,6 +169,10 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
   };
 
   const hasPassed = totalQuiz > 0 && quizState.correctCount > 0;
+  const isPerfect = quizState.correctCount === totalQuiz;
+  const earnedXP = Math.round((quizState.correctCount / totalQuiz) * 100);
+
+  const globalPct = TOTAL_MODULES > 0 ? Math.round((completedCount / TOTAL_MODULES) * 100) : 0;
 
   return (
     <main style={{
@@ -165,9 +184,20 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
       display: 'flex',
       flexDirection: 'column',
     }}>
+
+      {/* ─── Global progress strip ─── */}
+      <div style={{ height: 4, background: 'var(--surface-sunk)', flexShrink: 0 }}>
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: `${globalPct}%` }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          style={{ height: '100%', background: 'var(--green)', borderRadius: '0 2px 2px 0' }}
+        />
+      </div>
+
       {/* ─── Top bar ─── */}
       <div style={{
-        padding: isDesktop ? '20px 32px 14px' : '16px 20px 12px',
+        padding: isDesktop ? '16px 32px 8px' : '12px 20px 8px',
         display: 'flex',
         alignItems: 'center',
         gap: 12,
@@ -184,8 +214,8 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
           <ArrowLeft size={18} strokeWidth={2.5}/>
         </button>
         <div style={{ flex: 1, textAlign: 'center' }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-            Modul {mod.id} · {mod.emoji}
+          <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            Modul {mod.id} von {TOTAL_MODULES} · {mod.emoji} · {globalPct}% abgeschlossen
           </div>
           <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginTop: 2 }}>
             {mod.title}
@@ -201,8 +231,8 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
         </Pill>
       </div>
 
-      {/* Progress bar */}
-      <div style={{ padding: isDesktop ? '0 32px 18px' : '0 20px 16px' }}>
+      {/* ─── Phase progress bar ─── */}
+      <div style={{ padding: isDesktop ? '0 32px 14px' : '0 20px 12px' }}>
         {phase === 'learn' && (
           <ProgressBar
             completed={learnIndex + 1}
@@ -239,32 +269,49 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
               className="learn-grid"
               style={{ display: 'flex', flexDirection: 'column', gap: 14 }}
             >
-              {/* Content card */}
-              <Surface radius={22} padding={isDesktop ? 28 : 20}>
-                <Pill tone="red" size="sm" style={{ marginBottom: 12 }}>
-                  <BookOpen size={11}/> Lektion {learnIndex + 1} / {totalLearn}
-                </Pill>
-                <h2 style={{
-                  fontSize: isDesktop ? 24 : 21,
-                  fontWeight: 800,
-                  letterSpacing: '-0.4px',
-                  lineHeight: 1.2,
-                  margin: '0 0 12px',
-                  color: 'var(--text)',
-                }}>
-                  {mod.learnContent[learnIndex].heading}
-                </h2>
-                <p style={{
-                  fontSize: 15,
-                  lineHeight: 1.65,
-                  color: 'var(--text-muted)',
-                  margin: 0,
-                }}>
-                  {mod.learnContent[learnIndex].text}
-                </p>
-              </Surface>
+              {/* Left column: content card + optional video + optional infobox */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <Surface radius={22} padding={isDesktop ? 28 : 20}>
+                  <Pill tone="red" size="sm" style={{ marginBottom: 12 }}>
+                    <BookOpen size={11}/> Lektion {learnIndex + 1} / {totalLearn}
+                  </Pill>
+                  <h2 style={{
+                    fontSize: isDesktop ? 24 : 21,
+                    fontWeight: 800,
+                    letterSpacing: '-0.4px',
+                    lineHeight: 1.2,
+                    margin: '0 0 12px',
+                    color: 'var(--text)',
+                  }}>
+                    {currentLearn.heading}
+                  </h2>
+                  <p style={{
+                    fontSize: 15,
+                    lineHeight: 1.65,
+                    color: 'var(--text-muted)',
+                    margin: 0,
+                  }}>
+                    {currentLearn.text}
+                  </p>
+                </Surface>
 
-              {/* Tip card */}
+                {/* YouTube video for module 1 first slide */}
+                {mod.videoId && learnIndex === 0 && (
+                  <VideoEmbed
+                    videoId={mod.videoId}
+                    title={`Erklärvideo: ${mod.title}`}
+                  />
+                )}
+
+                {/* InfoBox if this learn step has one */}
+                {currentLearn.infoBox && (
+                  <InfoBox variant={currentLearn.infoBox.variant} title={currentLearn.infoBox.title}>
+                    {currentLearn.infoBox.text}
+                  </InfoBox>
+                )}
+              </div>
+
+              {/* Right column (desktop sidebar): Wächter tip */}
               <div style={{
                 display: 'flex', gap: 12, alignItems: 'flex-start',
                 background: 'var(--green-soft)',
@@ -375,7 +422,7 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <Waechter
-                  mood={hasPassed ? (quizState.correctCount === totalQuiz ? 'celebrate' : 'happy') : 'sad'}
+                  mood={hasPassed ? (isPerfect ? 'celebrate' : 'happy') : 'sad'}
                   size={100}
                 />
               </motion.div>
@@ -390,12 +437,33 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
                     fontSize: 26, fontWeight: 900, letterSpacing: '-0.5px',
                     margin: 0, color: 'var(--text)',
                   }}>
-                    {quizState.correctCount === totalQuiz ? 'Ausgezeichnet!' : 'Abgeschlossen.'}
+                    {isPerfect ? 'Ausgezeichnet! 🎉' : 'Gut gemacht!'}
                   </h2>
+
+                  {/* XP earned banner */}
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      background: 'linear-gradient(135deg, var(--xp), var(--streak))',
+                      color: '#fff',
+                      padding: '8px 18px',
+                      borderRadius: 999,
+                      fontWeight: 900,
+                      fontSize: 18,
+                      margin: '14px 0 4px',
+                      boxShadow: '0 4px 16px rgba(245,180,0,0.4)',
+                    }}
+                  >
+                    <Star size={16} fill="#fff" strokeWidth={0}/>
+                    +{earnedXP} XP
+                  </motion.div>
 
                   <div style={{
                     fontSize: 44, fontWeight: 900, color: 'var(--green)',
-                    letterSpacing: '-1px', margin: '14px 0 4px',
+                    letterSpacing: '-1px', margin: '10px 0 4px',
                   }}>
                     {Math.round((quizState.correctCount / totalQuiz) * 100)}
                     <span style={{ fontSize: 20, fontWeight: 700, opacity: 0.65 }}> %</span>
@@ -404,6 +472,27 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '0 0 16px' }}>
                     {quizState.correctCount} von {totalQuiz} Fragen korrekt beantwortet
                   </p>
+
+                  {/* Stars for perfect */}
+                  {isPerfect && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.35 }}
+                      style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 14 }}
+                    >
+                      {[0, 1, 2].map((i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.4 + i * 0.12, type: 'spring', stiffness: 280 }}
+                        >
+                          <Star size={28} fill="var(--xp)" color="var(--xp)" strokeWidth={1.5}/>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
 
                   <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
                     {mod.quiz.map((_, i) => (

@@ -1,0 +1,89 @@
+// German (DE) — default locale
+// To add EN or FR: copy this file to en.ts / fr.ts and translate the values.
+// Wire up via a React context (e.g. LocaleContext) that reads a localStorage
+// key "locale" and exposes the matching dictionary.
+
+export const de = {
+  // ─── Landing page ───
+  landing: {
+    orgBadge: 'MS Direct Group · Direct2Future',
+    title: 'Datenschutz-Schulung',
+    subtitle:
+      'Interaktive Zertifizierungsschulung zum Schweizer Datenschutzgesetz (DSG) für Mitarbeitende der MS Direct Group.',
+    labelName: 'Dein Name',
+    namePlaceholder: 'z.B. Anna Müller',
+    nameError: 'Bitte mindestens 2 Zeichen eingeben.',
+    btnStart: 'Schulung starten',
+    btnStarting: 'Wird gestartet…',
+    disclaimer: 'Deine Angaben werden ausschliesslich für die Schulungserfassung verwendet.',
+    footer: '© 2025 MS Direct Group · Direct2Future · Datenschutz-Schulung',
+    features: {
+      modules: { label: '5 Module', desc: 'DSG Grundlagen' },
+      time: { label: '~20 Min.', desc: 'Lernaufwand' },
+      cert: { label: 'Zertifikat', desc: 'Zum Download' },
+    },
+  },
+
+  // ─── Schulung overview ───
+  schulung: {
+    orgLabel: 'Direct2Future · Datenschutz-Schulung',
+    welcome: 'Willkommen,',
+    tipStart: 'Starte mit Modul 1 und arbeite dich strukturiert durch das Schweizer Datenschutzgesetz.',
+    tipDone: 'Alle Module erfolgreich abgeschlossen — rufe jetzt dein Zertifikat ab.',
+    tipProgress: (done: number) => `${done} von 5 Modulen abgeschlossen — weiter so.`,
+    allDoneTitle: 'Alle Module abgeschlossen',
+    allDoneDesc: 'Zertifikat abrufen und herunterladen',
+    allDoneBtn: 'Zum Zertifikat →',
+    footer: '© 2025 MS Direct Group · Direct2Future',
+    currentLabel: 'Aktuell',
+    loadingText: 'Fortschritt wird geladen…',
+  },
+
+  // ─── Modul page ───
+  modul: {
+    backLabel: 'Zurück',
+    modulOf: (id: number, total: number) => `Modul ${id} von ${total}`,
+    lessonOf: (current: number, total: number) => `Lektion ${current} / ${total}`,
+    questionOf: (current: number, total: number) => `Frage ${current} von ${total}`,
+    multiHint: '· Mehrere Antworten möglich',
+    hintLabel: 'Hinweis',
+    hintText: 'Der Quiz prüft das Verständnis des Prinzips — keine Definitionen auswendig lernen.',
+    btnNext: 'Weiter',
+    btnToQuiz: 'Zum Quiz',
+    btnCheckAnswer: 'Antwort prüfen',
+    btnOverview: 'Zur Modulübersicht →',
+    btnSaving: 'Wird gespeichert…',
+    btnRetry: 'Modul wiederholen',
+    donePassed: 'Gut gemacht!',
+    donePerfect: 'Ausgezeichnet! 🎉',
+    doneFailed: 'Modul nicht bestanden',
+    doneFailedDesc:
+      'Du hast keine Frage korrekt beantwortet. Bitte wiederhole das Modul und versuche es erneut.',
+    doneCorrect: (correct: number, total: number) => `${correct} von ${total} Fragen korrekt beantwortet`,
+    pillDone: 'Modul abgeschlossen',
+    pillFailed: 'Nicht bestanden',
+    nextQuestionLabel: 'Nächste Frage →',
+    seeResultLabel: 'Ergebnis ansehen →',
+    videoTitle: (moduleTitle: string) => `Erklärvideo: ${moduleTitle}`,
+  },
+
+  // ─── Abschluss page ───
+  abschluss: {
+    certOrg: 'Zertifikat · MS Direct Group',
+    certTitle: 'Datenschutz-Schulung',
+    certProgram: 'Direct2Future',
+    congratsTitle: 'Herzlichen Glückwunsch,',
+    congratsSubtitle: 'Du hast alle 5 Module der Datenschutz-Schulung erfolgreich abgeschlossen.',
+    pillDone: 'Schulung abgeschlossen',
+    awardedTo: 'Verliehen an',
+    statsPoints: 'Punkte',
+    statsTime: 'Zeit',
+    statsModules: 'Module',
+    statsTimeSuffix: 'min',
+    completedModules: 'Abgeschlossene Module',
+    btnDownload: 'Zertifikat herunterladen',
+    btnOverview: 'Zur Modulübersicht',
+  },
+} as const;
+
+export type I18nDict = typeof de;
