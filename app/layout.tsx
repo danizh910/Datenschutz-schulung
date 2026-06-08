@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className="h-full">
+    <html lang="de" className="dark h-full">
       <body className={`${plusJakarta.variable} min-h-full flex flex-col`}
             style={{ fontFamily: 'var(--font-plus-jakarta, "Plus Jakarta Sans"), system-ui, sans-serif' }}>
         {children}

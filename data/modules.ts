@@ -1,3 +1,9 @@
+export type InfoBoxData = {
+  variant: 'merksatz' | 'warnung';
+  title?: string;
+  text: string;
+};
+
 export type QuizQuestion = {
   question: string;
   type: 'single' | 'multi';
@@ -6,15 +12,19 @@ export type QuizQuestion = {
   explanation: string;
 };
 
+export type LearnContent = {
+  heading: string;
+  text: string;
+  infoBox?: InfoBoxData;
+};
+
 export type Module = {
   id: number;
   title: string;
   emoji: string;
   description: string;
-  learnContent: {
-    heading: string;
-    text: string;
-  }[];
+  videoId?: string;
+  learnContent: LearnContent[];
   quiz: QuizQuestion[];
 };
 
@@ -24,6 +34,7 @@ export const modules: Module[] = [
     title: 'Einführung in den Datenschutz',
     emoji: '🛡️',
     description: 'Lerne die Grundlagen des Datenschutzes und das Schweizer DSG kennen.',
+    videoId: 'bGHo6ahlXTI',
     learnContent: [
       {
         heading: 'Was ist Datenschutz?',
@@ -32,6 +43,11 @@ export const modules: Module[] = [
       {
         heading: 'Warum ist Datenschutz wichtig?',
         text: 'Mitarbeitende der MS Direct Group arbeiten täglich mit Kundendaten, internen Informationen und digitalen Systemen. Fehler passieren oft unabsichtlich — können aber grosse rechtliche und reputationsbezogene Folgen haben.',
+        infoBox: {
+          variant: 'warnung',
+          title: 'Achtung',
+          text: 'Auch unabsichtliche Verstösse können zu Bussen von bis zu CHF 250 000 führen — Unwissenheit schützt nicht vor Strafe.',
+        },
       },
       {
         heading: 'Rechtliche Grundlage',
@@ -40,6 +56,11 @@ export const modules: Module[] = [
       {
         heading: 'Grundprinzipien',
         text: 'Drei Prinzipien sind zentral: Verhältnismässigkeit (nur so viele Daten wie nötig), Zweckbindung (Daten nur für den angegebenen Zweck nutzen) und Transparenz (Betroffene müssen wissen, was mit ihren Daten passiert).',
+        infoBox: {
+          variant: 'merksatz',
+          title: 'Merksatz',
+          text: 'Nur so viele Daten wie nötig — nur für den angegebenen Zweck — und die Betroffenen müssen informiert sein.',
+        },
       },
     ],
     quiz: [
@@ -71,6 +92,18 @@ export const modules: Module[] = [
         explanation:
           'Datenbearbeitung umfasst jeden Umgang mit Personendaten — von der Beschaffung bis zur endgültigen Löschung. Alles ist gemeint.',
       },
+      {
+        question: 'Was versteht man unter dem Grundsatz der Verhältnismässigkeit?',
+        type: 'single',
+        options: [
+          'Alle verfügbaren Daten über eine Person sammeln',
+          'Nur so viele Daten bearbeiten, wie für den Zweck notwendig sind',
+          'Daten unbegrenzt lange aufbewahren',
+        ],
+        correctIndexes: [1],
+        explanation:
+          'Verhältnismässigkeit bedeutet Datenminimierung: Es dürfen nur so viele Daten erhoben und bearbeitet werden, wie für den konkreten Zweck tatsächlich erforderlich sind.',
+      },
     ],
   },
   {
@@ -82,10 +115,20 @@ export const modules: Module[] = [
       {
         heading: 'Was sind Personendaten?',
         text: 'Personendaten sind alle Angaben, die eine Person direkt oder indirekt identifizierbar machen. Dazu gehören Name, E-Mail, Telefon, IP-Adresse, aber auch Kombinationen wie Geburtsdatum + Wohnort.',
+        infoBox: {
+          variant: 'merksatz',
+          title: 'Merksatz',
+          text: 'Auch technische Daten wie IP-Adressen oder Gerätekennungen sind Personendaten — sie erlauben eine Identifikation.',
+        },
       },
       {
         heading: 'Normale vs. besonders schützenswerte Daten',
         text: 'Normale Personendaten: Name, Adresse, Berufsbezeichnung, Firmen-E-Mail. Besonders schützenswert (Art. 5 DSG): Gesundheit, Genetik, Biometrie, Religion, politische Ansichten, Strafverfolgung.',
+        infoBox: {
+          variant: 'warnung',
+          title: 'Wichtig',
+          text: 'Auch scheinbar harmlose Datenkombinationen (z.B. Geburtsdatum + Wohnort + Beruf) können bei Zusammenführung besonders schützenswert werden!',
+        },
       },
       {
         heading: 'Praxisbeispiel MS Direct',
@@ -123,6 +166,18 @@ export const modules: Module[] = [
         explanation:
           'Unverschlüsselte Übermittlung sensibler Kundendaten ist eine klassische Datenpanne. Laptop mit nach Hause nehmen oder Daten auf Unternehmensservern sind bei korrekter Handhabung kein Problem.',
       },
+      {
+        question: 'Eine IP-Adresse ist...',
+        type: 'single',
+        options: [
+          '...kein Personendatum, da sie technisch ist',
+          '...ein Personendatum, weil sie eine Person identifizierbar macht',
+          '...nur dann ein Personendatum, wenn sie mit einem Namen verbunden ist',
+        ],
+        correctIndexes: [1],
+        explanation:
+          'IP-Adressen gelten grundsätzlich als Personendaten, weil sie in Kombination mit anderen Informationen (z.B. beim Provider) eine Person identifizierbar machen.',
+      },
     ],
   },
   {
@@ -134,6 +189,11 @@ export const modules: Module[] = [
       {
         heading: 'Typische Risiken im Alltag',
         text: 'Die häufigsten Datenpannen entstehen nicht durch Hacker, sondern durch menschliche Fehler: Phishing-Mails, ungesichertes WLAN, verlorene Geräte, schwache Passwörter oder das Liegenlassen von ausgedruckten Dokumenten.',
+        infoBox: {
+          variant: 'warnung',
+          title: 'Alltag',
+          text: 'Über 80% aller Datenpannen sind auf menschliche Fehler zurückzuführen — nicht auf technische Hackerangriffe.',
+        },
       },
       {
         heading: 'Phishing erkennen',
@@ -142,10 +202,29 @@ export const modules: Module[] = [
       {
         heading: 'Dos ✅',
         text: 'Bildschirm sperren beim Verlassen des Arbeitsplatzes. VPN nutzen im Homeoffice und bei öffentlichem WLAN. Starke Passwörter + Zwei-Faktor-Authentifizierung (2FA). Verdächtige Mails sofort dem IT-Support melden.',
+        infoBox: {
+          variant: 'merksatz',
+          title: 'Tipp',
+          text: 'Win + L (Windows) oder Ctrl + Cmd + Q (Mac) sperrt den Bildschirm sofort — auch wenn du nur kurz aufstehst.',
+        },
       },
       {
         heading: "Don'ts ❌",
         text: 'Kein Passwort auf Notizzettel am Monitor. Keine Kundendaten per WhatsApp oder privater E-Mail. Kein öffentliches WLAN ohne VPN. Keine sensiblen Dokumente unbeaufsichtigt liegen lassen.',
+        infoBox: {
+          variant: 'warnung',
+          title: 'Niemals',
+          text: 'Schreibe Passwörter NIEMALS auf — weder auf Notizzetteln noch in ungesicherten Dateien. Und: Lass deinen Laptop NIE ungesperrt und unbeaufsichtigt, auch nicht «nur kurz».',
+        },
+      },
+      {
+        heading: 'Passwörter und Gerätesicherheit',
+        text: 'Verwende für jeden Dienst ein eigenes, starkes Passwort. Ein Passwort-Manager hilft dabei. Laptops und Mobilgeräte müssen beim Verlassen des Arbeitsplatzes immer gesperrt sein — ein entsperrter Laptop ist ein offenes Datenleck, das in Sekunden ausgenutzt werden kann.',
+        infoBox: {
+          variant: 'warnung',
+          title: 'Kritisch',
+          text: 'Ein einziger ungesperrter, unbeaufsichtigter Laptop kann Hunderte von Datensätzen kompromittieren. Das Sperren des Bildschirms ist Pflicht — keine Ausnahme.',
+        },
       },
     ],
     quiz: [
@@ -176,6 +255,31 @@ export const modules: Module[] = [
         explanation:
           'Bildschirm sperren, VPN und 2FA sind grundlegende Schutzmassnahmen. Passwörter auf Notizzetteln und WhatsApp für Kundendaten sind klare Sicherheitsverstösse.',
       },
+      {
+        question: 'Wo darf ein Passwort NICHT aufbewahrt werden?',
+        type: 'multi',
+        options: [
+          'In einem verschlüsselten Passwort-Manager',
+          'Auf einem Notizzettel am Monitor',
+          'In einer ungesicherten Textdatei auf dem Desktop',
+          'Im Gedächtnis',
+        ],
+        correctIndexes: [1, 2],
+        explanation:
+          'Passwörter auf Notizzetteln oder in ungesicherten Dateien sind ein massives Sicherheitsrisiko. Nur verschlüsselte Passwort-Manager oder das eigene Gedächtnis sind sichere Optionen.',
+      },
+      {
+        question: 'Du musst kurz aufstehen und dein Büro verlassen. Was tust du mit deinem Laptop?',
+        type: 'single',
+        options: [
+          'Ich lasse ihn offen — ich bin ja nur kurz weg',
+          'Ich schliesse nur das Dokument, das ich bearbeite',
+          'Ich sperre den Bildschirm (Win+L / Ctrl+Cmd+Q)',
+        ],
+        correctIndexes: [2],
+        explanation:
+          'Auch eine kurze Abwesenheit reicht für unbefugten Zugriff. Bildschirm sperren ist einfach (Win+L auf Windows, Ctrl+Cmd+Q auf Mac) und absolut notwendig.',
+      },
     ],
   },
   {
@@ -187,6 +291,11 @@ export const modules: Module[] = [
       {
         heading: 'Verantwortung der Mitarbeitenden',
         text: 'Jede Mitarbeiterin und jeder Mitarbeiter der MS Direct Group ist mitverantwortlich für den Schutz der Daten, mit denen sie arbeiten. Das bedeutet: Datenschutzrichtlinien einhalten, an Schulungen teilnehmen und Pannen sofort melden.',
+        infoBox: {
+          variant: 'merksatz',
+          title: 'Merksatz',
+          text: 'Datenschutz ist Teamarbeit — nicht nur die IT-Abteilung ist verantwortlich. Jede Person, die mit Daten arbeitet, trägt Verantwortung.',
+        },
       },
       {
         heading: 'Pflichten des Unternehmens',
@@ -199,6 +308,11 @@ export const modules: Module[] = [
       {
         heading: 'Meldeweg bei einer Datenpanne',
         text: 'Intern: Sofort die vorgesetzte Person oder den Datenschutzbeauftragten informieren. Extern (wenn Risiko für Betroffene): Das Unternehmen muss die Meldung an den EDÖB (Eidgenössischer Datenschutzbeauftragter) innerhalb von 72 Stunden erstatten.',
+        infoBox: {
+          variant: 'warnung',
+          title: '72-Stunden-Regel',
+          text: 'Das Unternehmen hat nach Entdeckung einer Datenpanne nur 72 Stunden für die externe Meldung an den EDÖB. Deshalb: sofort intern melden!',
+        },
       },
     ],
     quiz: [
@@ -227,13 +341,25 @@ export const modules: Module[] = [
         explanation:
           'Privacy by Design heisst: Datenschutz ist kein nachträgliches Add-on, sondern von Beginn an Teil jedes Prozesses und Systems — genau wie Sicherheit oder Qualität.',
       },
+      {
+        question: 'Was ist ein Bearbeitungsverzeichnis (Art. 12 DSG)?',
+        type: 'single',
+        options: [
+          'Eine Liste aller Mitarbeitenden, die Zugang zu Daten haben',
+          'Eine Dokumentation aller Datenbearbeitungstätigkeiten im Unternehmen',
+          'Ein Register aller Datenpannen der letzten 5 Jahre',
+        ],
+        correctIndexes: [1],
+        explanation:
+          'Das Bearbeitungsverzeichnis (Art. 12 DSG) dokumentiert systematisch alle Datenbearbeitungstätigkeiten: Welche Daten, für welchen Zweck, von wem, wie lange. Es ist ein zentrales Instrument des datenschutzkonformen Betriebs.',
+      },
     ],
   },
   {
     id: 5,
     title: 'Abschlussquiz',
     emoji: '🏆',
-    description: 'Zeig was du gelernt hast! 4 Fragen aus allen Modulen — du schaffst das.',
+    description: 'Zeig was du gelernt hast! 5 Fragen aus allen Modulen — du schaffst das.',
     learnContent: [],
     quiz: [
       {
@@ -271,6 +397,18 @@ export const modules: Module[] = [
         correctIndexes: [1],
         explanation:
           'Die 72-Stunden-Frist gilt analog zur EU-DSGVO. Deshalb muss intern sofort gemeldet werden, damit das Unternehmen reagieren kann.',
+      },
+      {
+        question: 'Was solltest du bei einem Phishing-Verdacht tun?',
+        type: 'single',
+        options: [
+          'Die E-Mail einfach löschen und vergessen',
+          'Auf den Link klicken um zu prüfen, ob es wirklich Phishing ist',
+          'Dem IT-Support melden und auf Anweisung warten',
+        ],
+        correctIndexes: [2],
+        explanation:
+          'Phishing immer dem IT-Support melden — auch wenn es harmlos wirkt. Einfach löschen reicht nicht, da der IT-Support die Bedrohung bewerten und andere warnen muss. Niemals auf verdächtige Links klicken!',
       },
     ],
   },
