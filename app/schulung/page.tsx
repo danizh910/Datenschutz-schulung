@@ -7,6 +7,7 @@ import { Flame, Zap, Lock, Check, Shield, User, AlertTriangle, Mail, Trophy } fr
 import { modules } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
 import Waechter from '@/components/Waechter';
+import VideoEmbed from '@/components/VideoEmbed';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 
 type ProgressEntry = {
@@ -366,6 +367,32 @@ export default function SchulungPage() {
             </div>
           </motion.div>
         )}
+      </div>
+
+      {/* ─── Einführungsvideo ─── */}
+      <div style={{
+        padding: isDesktop ? '0 40px' : '0 20px',
+        maxWidth: maxW,
+        margin: '0 auto 22px',
+      }}>
+        <div style={{
+          background: 'var(--surface)',
+          borderRadius: 20,
+          padding: '14px 16px 16px',
+          boxShadow: 'var(--clay-sm)',
+          border: '1px solid var(--border-soft)',
+        }}>
+          <div style={{
+            fontSize: 10, fontWeight: 800, letterSpacing: '0.5px',
+            textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 8,
+          }}>
+            Einführungsvideo · Datenschutz-Schulung
+          </div>
+          <VideoEmbed
+            videoId="bGHo6ahlXTI"
+            title="Einführungsvideo: Datenschutz-Schulung MS Direct Group"
+          />
+        </div>
       </div>
 
       {/* ─── Wächter intro ─── */}
