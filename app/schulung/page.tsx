@@ -16,15 +16,6 @@ import { useLocale } from '@/lib/locale-context';
 type ProgressEntry = { moduleId: number; completed: boolean; score: number };
 type ModuleStatus = 'done' | 'current' | 'locked';
 
-const PATH_POSITIONS = [
-  { x: 22, y: 40  },
-  { x: 75, y: 200 },
-  { x: 22, y: 360 },
-  { x: 75, y: 520 },
-  { x: 22, y: 680 },
-  { x: 75, y: 840 },
-  { x: 48, y: 1000 },
-];
 
 function scoreBadge(score: number): { bg: string; color: string; border: string; star: boolean } {
   if (score === 100) return { bg: 'var(--xp-soft)',     color: '#92640a',          border: 'rgba(245,180,0,0.45)',   star: true  };
@@ -34,13 +25,11 @@ function scoreBadge(score: number): { bg: string; color: string; border: string;
 }
 
 function PathConnectorSVG({
-  from, to, done, totalW, padding,
-}: { from: { x: number; y: number }; to: { x: number; y: number }; done: boolean; totalW: number; padding: number }) {
-  // Node centers are at (x% of totalW) in parent coords.
-  // SVG origin is `padding` px from parent left, so subtract padding for SVG-local coords.
-  const x1 = (from.x / 100) * totalW - padding;
+  from, to, done, totalW,
+}: { from: { x: number; y: number }; to: { x: number; y: number }; done: boolean; totalW: number }) {
+  const x1 = (from.x / 100) * totalW;
   const y1 = from.y + 40;
-  const x2 = (to.x / 100) * totalW - padding;
+  const x2 = (to.x / 100) * totalW;
   const y2 = to.y + 40;
   const midY = (y1 + y2) / 2;
   const d = `M${x1},${y1} C${x1},${midY} ${x2},${midY} ${x2},${y2}`;
@@ -48,10 +37,8 @@ function PathConnectorSVG({
     <>
       <path d={d} fill="none" stroke="var(--surface-sunk)" strokeWidth={6} strokeLinecap="round" strokeDasharray="10 8" />
       {done && (
-        <path
-          d={d} fill="none" stroke="var(--green)" strokeWidth={6} strokeLinecap="round"
-          style={{ filter: 'drop-shadow(0 0 5px rgba(21,184,134,0.45))' }}
-        />
+        <path d={d} fill="none" stroke="var(--green)" strokeWidth={6} strokeLinecap="round"
+          style={{ filter: 'drop-shadow(0 0 5px rgba(21,184,134,0.45))' }} />
       )}
     </>
   );
@@ -248,7 +235,17 @@ export default function SchulungPage() {
     );
   }
 
-  const pathHeight = PATH_POSITIONS[PATH_POSITIONS.length - 1].y + 130;
+  const stepY = isDesktop ? 180 : 158;
+  const leftX = isDesktop ? 25 : 27;
+  const rightX = isDesktop ? 75 : 73;
+  const pathPositions = modules.map((_, i) => {
+    const isLast = i === modules.length - 1;
+    return {
+      x: isLast ? 50 : i % 2 === 0 ? leftX : rightX,
+      y: 40 + i * stepY,
+    };
+  });
+  const pathHeight = pathPositions[pathPositions.length - 1].y + (isDesktop ? 150 : 140);
   const maxW = isDesktop ? 860 : 480;
   const barColor = progressPct === 100 ? 'var(--green)' : progressPct >= 50 ? 'var(--xp)' : 'var(--red)';
 
@@ -357,21 +354,20 @@ export default function SchulungPage() {
       {/* ─── Snake Path ─── */}
       <div
         ref={pathRef}
-        style={{ position: 'relative', maxWidth: maxW, margin: '0 auto', padding: isDesktop ? '0 60px' : '0 20px', height: pathHeight }}
+        style={{ position: 'relative', maxWidth: maxW, margin: '0 auto', padding: 0, height: pathHeight }}
       >
         <svg
-          style={{ position: 'absolute', inset: isDesktop ? '0 60px' : '0 20px', pointerEvents: 'none', overflow: 'visible' }}
-          width={containerW - (isDesktop ? 120 : 40)}
+          style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'visible' }}
+          width={containerW}
           height={pathHeight}
         >
-          {PATH_POSITIONS.slice(0, -1).map((pos, i) => (
+          {pathPositions.slice(0, -1).map((pos, i) => (
             <PathConnectorSVG
               key={i}
               from={pos}
-              to={PATH_POSITIONS[i + 1]}
+              to={pathPositions[i + 1]}
               done={getStatus(modules[i].id) === 'done'}
               totalW={containerW}
-              padding={isDesktop ? 60 : 20}
             />
           ))}
         </svg>
@@ -380,7 +376,7 @@ export default function SchulungPage() {
           <ModulePathNode
             key={mod.id}
             mod={mod}
-            pos={PATH_POSITIONS[i]}
+            pos={pathPositions[i]}
             status={getStatus(mod.id)}
             score={getScore(mod.id)}
             onClick={() => router.push(`/modul/${mod.id}`)}
