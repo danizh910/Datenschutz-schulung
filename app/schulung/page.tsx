@@ -224,12 +224,11 @@ export default function SchulungPage() {
   }
 
   const stepY = isDesktop ? 168 : 150;
-  const leftX = 24;
-  const rightX = 76;
+  const weave = isDesktop ? 16 : 18;
   const pathPositions = modules.map((_, i) => {
     const isLast = i === modules.length - 1;
     return {
-      x: isLast ? 50 : i % 2 === 0 ? leftX : rightX,
+      x: isLast ? 50 : 50 + (i % 2 === 0 ? -weave : weave),
       y: 40 + i * stepY,
     };
   });
@@ -341,7 +340,7 @@ export default function SchulungPage() {
 
       {/* ─── Snake Path ─── */}
       <div
-        style={{ position: 'relative', maxWidth: isDesktop ? 460 : maxW, margin: '0 auto', padding: 0, height: pathHeight }}
+        style={{ position: 'relative', maxWidth: isDesktop ? 420 : maxW, margin: '0 auto', padding: 0, height: pathHeight }}
       >
         <svg
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'visible' }}
