@@ -34,11 +34,13 @@ function scoreBadge(score: number): { bg: string; color: string; border: string;
 }
 
 function PathConnectorSVG({
-  from, to, done, containerW,
-}: { from: { x: number; y: number }; to: { x: number; y: number }; done: boolean; containerW: number }) {
-  const x1 = (from.x / 100) * containerW;
+  from, to, done, totalW, padding,
+}: { from: { x: number; y: number }; to: { x: number; y: number }; done: boolean; totalW: number; padding: number }) {
+  // Node centers are at (x% of totalW) in parent coords.
+  // SVG origin is `padding` px from parent left, so subtract padding for SVG-local coords.
+  const x1 = (from.x / 100) * totalW - padding;
   const y1 = from.y + 40;
-  const x2 = (to.x / 100) * containerW;
+  const x2 = (to.x / 100) * totalW - padding;
   const y2 = to.y + 40;
   const midY = (y1 + y2) / 2;
   const d = `M${x1},${y1} C${x1},${midY} ${x2},${midY} ${x2},${y2}`;
@@ -368,7 +370,8 @@ export default function SchulungPage() {
               from={pos}
               to={PATH_POSITIONS[i + 1]}
               done={getStatus(modules[i].id) === 'done'}
-              containerW={containerW - (isDesktop ? 120 : 40)}
+              totalW={containerW}
+              padding={isDesktop ? 60 : 20}
             />
           ))}
         </svg>
