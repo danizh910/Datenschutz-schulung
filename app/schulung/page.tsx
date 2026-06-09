@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Flame, Zap, Lock, Check, Star } from 'lucide-react';
@@ -25,19 +25,19 @@ function scoreBadge(score: number): { bg: string; color: string; border: string;
 }
 
 function PathConnectorSVG({
-  from, to, done, totalW,
-}: { from: { x: number; y: number }; to: { x: number; y: number }; done: boolean; totalW: number }) {
-  const x1 = (from.x / 100) * totalW;
+  from, to, done,
+}: { from: { x: number; y: number }; to: { x: number; y: number }; done: boolean }) {
+  const x1 = from.x;
   const y1 = from.y + 40;
-  const x2 = (to.x / 100) * totalW;
+  const x2 = to.x;
   const y2 = to.y + 40;
   const midY = (y1 + y2) / 2;
   const d = `M${x1},${y1} C${x1},${midY} ${x2},${midY} ${x2},${y2}`;
   return (
     <>
-      <path d={d} fill="none" stroke="var(--surface-sunk)" strokeWidth={6} strokeLinecap="round" strokeDasharray="10 8" />
+      <path d={d} fill="none" stroke="var(--surface-sunk)" strokeWidth={6} strokeLinecap="round" strokeDasharray="10 8" vectorEffect="non-scaling-stroke" />
       {done && (
-        <path d={d} fill="none" stroke="var(--green)" strokeWidth={6} strokeLinecap="round"
+        <path d={d} fill="none" stroke="var(--green)" strokeWidth={6} strokeLinecap="round" vectorEffect="non-scaling-stroke"
           style={{ filter: 'drop-shadow(0 0 5px rgba(21,184,134,0.45))' }} />
       )}
     </>
@@ -177,8 +177,6 @@ export default function SchulungPage() {
   const [progressData, setProgressData] = useState<ProgressEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [streak] = useState(3);
-  const [containerW, setContainerW] = useState(360);
-  const pathRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const isDesktop = useIsDesktop();
   const t = useTranslation();
@@ -197,16 +195,6 @@ export default function SchulungPage() {
       .catch(console.error)
       .finally(() => setLoading(false));
   }, [router]);
-
-  useEffect(() => {
-    if (!pathRef.current) return;
-    const ro = new ResizeObserver(() => {
-      if (pathRef.current) setContainerW(pathRef.current.offsetWidth);
-    });
-    ro.observe(pathRef.current);
-    setContainerW(pathRef.current.offsetWidth);
-    return () => ro.disconnect();
-  }, []);
 
   const completedIds = new Set(progressData.filter((p) => p.completed).map((p) => p.moduleId));
   const completedCount = completedIds.size;
@@ -235,9 +223,9 @@ export default function SchulungPage() {
     );
   }
 
-  const stepY = isDesktop ? 180 : 158;
-  const leftX = isDesktop ? 25 : 27;
-  const rightX = isDesktop ? 75 : 73;
+  const stepY = isDesktop ? 168 : 150;
+  const leftX = 24;
+  const rightX = 76;
   const pathPositions = modules.map((_, i) => {
     const isLast = i === modules.length - 1;
     return {
@@ -353,13 +341,12 @@ export default function SchulungPage() {
 
       {/* ─── Snake Path ─── */}
       <div
-        ref={pathRef}
-        style={{ position: 'relative', maxWidth: maxW, margin: '0 auto', padding: 0, height: pathHeight }}
+        style={{ position: 'relative', maxWidth: isDesktop ? 460 : maxW, margin: '0 auto', padding: 0, height: pathHeight }}
       >
         <svg
-          style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'visible' }}
-          width={containerW}
-          height={pathHeight}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'visible' }}
+          viewBox={`0 0 100 ${pathHeight}`}
+          preserveAspectRatio="none"
         >
           {pathPositions.slice(0, -1).map((pos, i) => (
             <PathConnectorSVG
@@ -367,7 +354,6 @@ export default function SchulungPage() {
               from={pos}
               to={pathPositions[i + 1]}
               done={getStatus(modules[i].id) === 'done'}
-              totalW={containerW}
             />
           ))}
         </svg>
