@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Flame, Zap, Lock, Check, Shield, User, AlertTriangle, Mail, Trophy } from 'lucide-react';
+import { Flame, Zap, Lock, Check, Shield, User, AlertTriangle, Mail, Trophy, BookOpen, Phone } from 'lucide-react';
 import { getModules } from '@/data/modules';
 import type { Module } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
@@ -26,10 +26,12 @@ const PATH_POSITIONS = [
   { x: 68, y: 170 },
   { x: 30, y: 300 },
   { x: 68, y: 430 },
-  { x: 50, y: 560 },
+  { x: 30, y: 560 },
+  { x: 68, y: 690 },
+  { x: 50, y: 820 },
 ];
 
-const MODULE_ICONS = [Shield, User, AlertTriangle, Mail, Trophy];
+const MODULE_ICONS = [Shield, BookOpen, User, Mail, Lock, Phone, Trophy];
 
 function PathConnectorSVG({
   from, to, done, containerW,
@@ -331,10 +333,10 @@ export default function SchulungPage() {
         </div>
 
         <div style={{ marginTop: 18, marginBottom: 22 }}>
-          <ProgressBar completed={completedCount} total={5}/>
+          <ProgressBar completed={completedCount} total={modules.length}/>
         </div>
 
-        {completedCount === 5 && (
+        {completedCount === modules.length && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -414,7 +416,7 @@ export default function SchulungPage() {
           style={{ flexShrink: 0 }}
         >
           <Waechter
-            mood={completedCount === 5 ? 'celebrate' : completedCount > 0 ? 'happy' : 'wave'}
+            mood={completedCount === modules.length ? 'celebrate' : completedCount > 0 ? 'happy' : 'wave'}
             size={52}
           />
         </motion.div>
@@ -432,9 +434,9 @@ export default function SchulungPage() {
         }}>
           {completedCount === 0
             ? t.schulung.tipStart
-            : completedCount === 5
+            : completedCount === modules.length
             ? t.schulung.tipDone
-            : t.schulung.tipProgress(completedCount)
+            : t.schulung.tipProgress(completedCount, modules.length)
           }
         </div>
       </div>

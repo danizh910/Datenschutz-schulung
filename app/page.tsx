@@ -8,6 +8,8 @@ import Surface, { ClayButton } from '@/components/Surface';
 import Waechter from '@/components/Waechter';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 import { useTranslation } from '@/lib/i18n';
+import { getModules } from '@/data/modules';
+import { useLocale } from '@/lib/locale-context';
 
 export default function LandingPage() {
   const [name, setName] = useState('');
@@ -17,6 +19,8 @@ export default function LandingPage() {
   const router = useRouter();
   const isDesktop = useIsDesktop();
   const t = useTranslation();
+  const { locale } = useLocale();
+  const modules = getModules(locale);
 
   const handleStart = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +51,7 @@ export default function LandingPage() {
   };
 
   const features = [
-    { icon: BookOpen, label: t.landing.features.modules.label, desc: t.landing.features.modules.desc, color: 'var(--red)',   bg: 'var(--red-soft)'  },
+    { icon: BookOpen, label: t.landing.features.modules.label(modules.length), desc: t.landing.features.modules.desc, color: 'var(--red)',   bg: 'var(--red-soft)'  },
     { icon: Clock,    label: t.landing.features.time.label,    desc: t.landing.features.time.desc,    color: 'var(--blue)',  bg: 'var(--blue-soft)' },
     { icon: Award,    label: t.landing.features.cert.label,    desc: t.landing.features.cert.desc,    color: 'var(--green)', bg: 'var(--green-soft)'},
   ];

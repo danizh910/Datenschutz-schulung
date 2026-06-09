@@ -79,7 +79,7 @@ export default function AbschlussPage() {
       .then((data) => {
         if (data.progress) {
           const completed = (data.progress as ProgressEntry[]).filter((p) => p.completed);
-          if (completed.length < 5) { router.replace('/schulung'); return; }
+          if (completed.length < modules.length) { router.replace('/schulung'); return; }
           setProgressData(data.progress);
         }
       })
@@ -95,7 +95,7 @@ export default function AbschlussPage() {
   });
 
   const totalScore = progressData.reduce((sum, p) => sum + (p.score || 0), 0);
-  const maxScore = 500;
+  const maxScore = modules.length * 100;
   const stars = Math.round((totalScore / maxScore) * 5);
 
   if (loading) {
@@ -115,9 +115,9 @@ export default function AbschlussPage() {
   }
 
   const stats = [
-    { label: t.abschluss.statsPoints, value: String(totalScore), suffix: '/500', color: 'var(--red)',   bg: 'var(--red-soft)'   },
+    { label: t.abschluss.statsPoints, value: String(totalScore), suffix: `/${modules.length * 100}`, color: 'var(--red)',   bg: 'var(--red-soft)'   },
     { label: t.abschluss.statsTime,   value: '~20',              suffix: t.abschluss.statsTimeSuffix,   color: 'var(--blue)',  bg: 'var(--blue-soft)'  },
-    { label: t.abschluss.statsModules,value: '5',                suffix: '✓',    color: 'var(--green)', bg: 'var(--green-soft)' },
+    { label: t.abschluss.statsModules,value: String(modules.length), suffix: '✓', color: 'var(--green)', bg: 'var(--green-soft)' },
   ];
 
   const maxW = isDesktop ? 640 : 480;
@@ -157,7 +157,7 @@ export default function AbschlussPage() {
           {t.abschluss.congratsTitle} {userName}.
         </h1>
         <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
-          {t.abschluss.congratsSubtitle}
+          {t.abschluss.congratsSubtitle(modules.length)}
         </p>
       </div>
 
