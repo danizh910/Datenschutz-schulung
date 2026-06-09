@@ -7,6 +7,7 @@ import { BookOpen, Clock, Award } from 'lucide-react';
 import Surface, { ClayButton } from '@/components/Surface';
 import Waechter from '@/components/Waechter';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
+import { useTranslation } from '@/lib/i18n';
 
 export default function LandingPage() {
   const [name, setName] = useState('');
@@ -15,11 +16,12 @@ export default function LandingPage() {
   const [focused, setFocused] = useState(false);
   const router = useRouter();
   const isDesktop = useIsDesktop();
+  const t = useTranslation();
 
   const handleStart = async (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim().length < 2) {
-      setError('Bitte mindestens 2 Zeichen eingeben.');
+      setError(t.landing.nameError);
       return;
     }
     setLoading(true);
@@ -32,22 +34,22 @@ export default function LandingPage() {
       });
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || 'Fehler beim Anlegen.');
+        throw new Error(data.error || t.landing.nameError);
       }
       const { userId, name: savedName } = await res.json();
       localStorage.setItem('userId', userId);
       localStorage.setItem('userName', savedName);
       router.push('/schulung');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Unbekannter Fehler.');
+      setError(err instanceof Error ? err.message : t.landing.nameError);
       setLoading(false);
     }
   };
 
   const features = [
-    { icon: BookOpen, label: '5 Module',    desc: 'DSG Grundlagen',  color: 'var(--red)',   bg: 'var(--red-soft)'  },
-    { icon: Clock,    label: '~20 Min.',    desc: 'Lernaufwand',     color: 'var(--blue)',  bg: 'var(--blue-soft)' },
-    { icon: Award,    label: 'Zertifikat', desc: 'Zum Download',    color: 'var(--green)', bg: 'var(--green-soft)'},
+    { icon: BookOpen, label: t.landing.features.modules.label, desc: t.landing.features.modules.desc, color: 'var(--red)',   bg: 'var(--red-soft)'  },
+    { icon: Clock,    label: t.landing.features.time.label,    desc: t.landing.features.time.desc,    color: 'var(--blue)',  bg: 'var(--blue-soft)' },
+    { icon: Award,    label: t.landing.features.cert.label,    desc: t.landing.features.cert.desc,    color: 'var(--green)', bg: 'var(--green-soft)'},
   ];
 
   return (
@@ -62,7 +64,6 @@ export default function LandingPage() {
     }}>
       <div style={{ width: '100%', maxWidth: isDesktop ? 560 : 440 }}>
 
-        {/* Organisation badge */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,11 +78,10 @@ export default function LandingPage() {
             background: 'var(--surface-soft)',
             border: '1px solid var(--border)',
           }}>
-            MS Direct Group · Direct2Future
+            {t.landing.orgBadge}
           </span>
         </motion.div>
 
-        {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,7 +103,7 @@ export default function LandingPage() {
             margin: '0 0 10px',
             color: 'var(--text)',
           }}>
-            Datenschutz-Schulung
+            {t.landing.title}
           </h1>
           <p style={{
             fontSize: 14,
@@ -114,12 +114,10 @@ export default function LandingPage() {
             marginLeft: 'auto',
             marginRight: 'auto',
           }}>
-            Interaktive Zertifizierungsschulung zum Schweizer Datenschutzgesetz (DSG)
-            für Mitarbeitende der MS Direct Group.
+            {t.landing.subtitle}
           </p>
         </motion.div>
 
-        {/* Card */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -127,8 +125,6 @@ export default function LandingPage() {
           style={{ marginBottom: 12 }}
         >
           <Surface radius={24} padding={isDesktop ? 28 : 22}>
-
-            {/* Feature tiles */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr 1fr',
@@ -153,7 +149,6 @@ export default function LandingPage() {
 
             <div style={{ height: 1, background: 'var(--border-soft)', marginBottom: 22 }}/>
 
-            {/* Form */}
             <form onSubmit={handleStart} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
                 <label style={{
@@ -165,13 +160,13 @@ export default function LandingPage() {
                   letterSpacing: '0.5px',
                   textTransform: 'uppercase',
                 }}>
-                  Dein Name
+                  {t.landing.labelName}
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="z.B. Anna Müller"
+                  placeholder={t.landing.namePlaceholder}
                   autoFocus
                   maxLength={80}
                   onFocus={() => setFocused(true)}
@@ -203,7 +198,7 @@ export default function LandingPage() {
                 fullWidth
                 disabled={loading || name.trim().length < 2}
               >
-                {loading ? 'Wird gestartet…' : 'Schulung starten'}
+                {loading ? t.landing.btnStarting : t.landing.btnStart}
               </ClayButton>
 
               <p style={{
@@ -213,14 +208,14 @@ export default function LandingPage() {
                 margin: 0,
                 lineHeight: 1.5,
               }}>
-                Deine Angaben werden ausschliesslich für die Schulungserfassung verwendet.
+                {t.landing.disclaimer}
               </p>
             </form>
           </Surface>
         </motion.div>
 
         <p style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-subtle)', marginTop: 4 }}>
-          © 2025 MS Direct Group · Direct2Future · Datenschutz-Schulung
+          {t.landing.footer}
         </p>
       </div>
     </main>

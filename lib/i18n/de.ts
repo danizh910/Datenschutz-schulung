@@ -1,15 +1,8 @@
-// German (DE) — default locale
-// To add EN or FR: copy this file to en.ts / fr.ts and translate the values.
-// Wire up via a React context (e.g. LocaleContext) that reads a localStorage
-// key "locale" and exposes the matching dictionary.
-
 export const de = {
-  // ─── Landing page ───
   landing: {
     orgBadge: 'MS Direct Group · Direct2Future',
     title: 'Datenschutz-Schulung',
-    subtitle:
-      'Interaktive Zertifizierungsschulung zum Schweizer Datenschutzgesetz (DSG) für Mitarbeitende der MS Direct Group.',
+    subtitle: 'Interaktive Zertifizierungsschulung zum Schweizer Datenschutzgesetz (DSG) für Mitarbeitende der MS Direct Group.',
     labelName: 'Dein Name',
     namePlaceholder: 'z.B. Anna Müller',
     nameError: 'Bitte mindestens 2 Zeichen eingeben.',
@@ -23,8 +16,6 @@ export const de = {
       cert: { label: 'Zertifikat', desc: 'Zum Download' },
     },
   },
-
-  // ─── Schulung overview ───
   schulung: {
     orgLabel: 'Direct2Future · Datenschutz-Schulung',
     welcome: 'Willkommen,',
@@ -37,9 +28,8 @@ export const de = {
     footer: '© 2025 MS Direct Group · Direct2Future',
     currentLabel: 'Aktuell',
     loadingText: 'Fortschritt wird geladen…',
+    videoLabel: 'Einführungsvideo · Datenschutz-Schulung',
   },
-
-  // ─── Modul page ───
   modul: {
     backLabel: 'Zurück',
     modulOf: (id: number, total: number) => `Modul ${id} von ${total}`,
@@ -57,17 +47,16 @@ export const de = {
     donePassed: 'Gut gemacht!',
     donePerfect: 'Ausgezeichnet! 🎉',
     doneFailed: 'Modul nicht bestanden',
-    doneFailedDesc:
-      'Du hast keine Frage korrekt beantwortet. Bitte wiederhole das Modul und versuche es erneut.',
+    doneFailedDesc: 'Du hast keine Frage korrekt beantwortet. Bitte wiederhole das Modul und versuche es erneut.',
     doneCorrect: (correct: number, total: number) => `${correct} von ${total} Fragen korrekt beantwortet`,
     pillDone: 'Modul abgeschlossen',
     pillFailed: 'Nicht bestanden',
     nextQuestionLabel: 'Nächste Frage →',
     seeResultLabel: 'Ergebnis ansehen →',
     videoTitle: (moduleTitle: string) => `Erklärvideo: ${moduleTitle}`,
+    globalPct: (pct: number) => `${pct}% abgeschlossen`,
+    notFound: 'Modul nicht gefunden.',
   },
-
-  // ─── Abschluss page ───
   abschluss: {
     certOrg: 'Zertifikat · MS Direct Group',
     certTitle: 'Datenschutz-Schulung',

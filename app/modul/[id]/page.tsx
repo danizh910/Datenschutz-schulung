@@ -4,7 +4,7 @@ import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, RefreshCw, Star } from 'lucide-react';
-import { modules } from '@/data/modules';
+import { getModules } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
 import FeedbackBanner from '@/components/FeedbackBanner';
 import AnswerCard from '@/components/AnswerCard';
@@ -13,6 +13,8 @@ import Waechter from '@/components/Waechter';
 import VideoEmbed from '@/components/VideoEmbed';
 import InfoBox from '@/components/InfoBox';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
+import { useTranslation } from '@/lib/i18n';
+import { useLocale } from '@/lib/locale-context';
 
 type Phase = 'learn' | 'quiz' | 'done';
 
@@ -25,12 +27,15 @@ type QuizState = {
 };
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
-const TOTAL_MODULES = modules.length;
 
 export default function ModulPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
   const isDesktop = useIsDesktop();
+  const t = useTranslation();
+  const { locale } = useLocale();
+  const modules = getModules(locale);
+  const TOTAL_MODULES = modules.length;
 
   const moduleId = parseInt(id);
   const mod = modules.find((m) => m.id === moduleId);
@@ -67,7 +72,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
   if (!mod) {
     return (
       <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)' }}>
-        <p style={{ color: 'var(--red)' }}>Modul nicht gefunden.</p>
+        <p style={{ color: 'var(--red)' }}>{t.modul.notFound}</p>
       </main>
     );
   }
@@ -215,7 +220,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
         </button>
         <div style={{ flex: 1, textAlign: 'center' }}>
           <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-            Modul {mod.id} von {TOTAL_MODULES} · {mod.emoji} · {globalPct}% abgeschlossen
+            {t.modul.modulOf(mod.id, TOTAL_MODULES)} · {mod.emoji} · {t.modul.globalPct(globalPct)}
           </div>
           <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginTop: 2 }}>
             {mod.title}
@@ -273,7 +278,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <Surface radius={22} padding={isDesktop ? 28 : 20}>
                   <Pill tone="red" size="sm" style={{ marginBottom: 12 }}>
-                    <BookOpen size={11}/> Lektion {learnIndex + 1} / {totalLearn}
+                    <BookOpen size={11}/> {t.modul.lessonOf(learnIndex + 1, totalLearn)}
                   </Pill>
                   <h2 style={{
                     fontSize: isDesktop ? 24 : 21,
@@ -299,7 +304,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                 {mod.videoId && learnIndex === 0 && (
                   <VideoEmbed
                     videoId={mod.videoId}
-                    title={`Erklärvideo: ${mod.title}`}
+                    title={t.modul.videoTitle(mod.title)}
                   />
                 )}
 
@@ -332,10 +337,10 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                     color: 'var(--green-deep)', letterSpacing: '0.5px',
                     textTransform: 'uppercase', marginBottom: 4,
                   }}>
-                    Hinweis
+                    {t.modul.hintLabel}
                   </div>
                   <div style={{ fontSize: 13, lineHeight: 1.5, color: 'var(--green-ink)', fontWeight: 500 }}>
-                    Der Quiz prüft das Verständnis des Prinzips — keine Definitionen auswendig lernen.
+                    {t.modul.hintText}
                   </div>
                 </div>
               </div>
@@ -357,13 +362,13 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                   fontSize: 11, fontWeight: 700, color: 'var(--text-muted)',
                   letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 8,
                 }}>
-                  Frage {quizState.questionIndex + 1} von {totalQuiz}
+                  {t.modul.questionOf(quizState.questionIndex + 1, totalQuiz)}
                   {currentQuestion.type === 'multi' && (
                     <span style={{
                       color: 'var(--blue)', marginLeft: 8, fontWeight: 600,
                       letterSpacing: 0, textTransform: 'none',
                     }}>
-                      · Mehrere Antworten möglich
+                      {t.modul.multiHint}
                     </span>
                   )}
                 </div>
@@ -398,7 +403,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                   disabled={quizState.selectedIndexes.length === 0}
                   onClick={handleSubmitAnswer}
                 >
-                  Antwort prüfen
+                  {t.modul.btnCheckAnswer}
                 </ClayButton>
               )}
             </motion.div>
@@ -431,13 +436,13 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                 /* ── PASSED ── */
                 <Surface radius={22} style={{ width: '100%', textAlign: 'center' }}>
                   <Pill tone="green" size="sm" style={{ marginBottom: 12 }}>
-                    <CheckCircle size={11}/> Modul abgeschlossen
+                    <CheckCircle size={11}/> {t.modul.pillDone}
                   </Pill>
                   <h2 style={{
                     fontSize: 26, fontWeight: 900, letterSpacing: '-0.5px',
                     margin: 0, color: 'var(--text)',
                   }}>
-                    {isPerfect ? 'Ausgezeichnet! 🎉' : 'Gut gemacht!'}
+                    {isPerfect ? t.modul.donePerfect : t.modul.donePassed}
                   </h2>
 
                   {/* XP earned banner */}
@@ -470,7 +475,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                   </div>
 
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '0 0 16px' }}>
-                    {quizState.correctCount} von {totalQuiz} Fragen korrekt beantwortet
+                    {t.modul.doneCorrect(quizState.correctCount, totalQuiz)}
                   </p>
 
                   {/* Stars for perfect */}
@@ -512,31 +517,31 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                 /* ── FAILED (0 correct) ── */
                 <Surface radius={22} style={{ width: '100%', textAlign: 'center' }} accent="var(--red)">
                   <Pill tone="red" size="sm" style={{ marginBottom: 12 }}>
-                    Nicht bestanden
+                    {t.modul.pillFailed}
                   </Pill>
                   <h2 style={{
                     fontSize: 24, fontWeight: 800, letterSpacing: '-0.4px',
                     margin: 0, color: 'var(--text)',
                   }}>
-                    Modul nicht bestanden
+                    {t.modul.doneFailed}
                   </h2>
                   <p style={{
                     fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55,
                     margin: '12px 0 0',
                   }}>
-                    Du hast keine Frage korrekt beantwortet. Bitte wiederhole das Modul und versuche es erneut.
+                    {t.modul.doneFailedDesc}
                   </p>
                 </Surface>
               )}
 
               {hasPassed ? (
                 <ClayButton fullWidth variant="success" disabled={saving} onClick={handleFinishModule}>
-                  {saving ? 'Wird gespeichert…' : 'Zur Modulübersicht →'}
+                  {saving ? t.modul.btnSaving : t.modul.btnOverview}
                 </ClayButton>
               ) : (
                 <ClayButton fullWidth onClick={handleRetryModule}>
                   <RefreshCw size={16} color="#fff" strokeWidth={2.5}/>
-                  Modul wiederholen
+                  {t.modul.btnRetry}
                 </ClayButton>
               )}
             </motion.div>
@@ -561,7 +566,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
             if (learnIndex < totalLearn - 1) setLearnIndex((i) => i + 1);
             else setPhase('quiz');
           }}>
-            {learnIndex < totalLearn - 1 ? 'Weiter' : 'Zum Quiz'}
+            {learnIndex < totalLearn - 1 ? t.modul.btnNext : t.modul.btnToQuiz}
             <ArrowRight size={16} color="#fff" strokeWidth={3}/>
           </ClayButton>
         </div>
@@ -574,7 +579,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
             isCorrect={quizState.isCorrect}
             explanation={currentQuestion.explanation}
             onNext={handleNextQuestion}
-            nextLabel={quizState.questionIndex + 1 >= totalQuiz ? 'Ergebnis ansehen →' : 'Nächste Frage →'}
+            nextLabel={quizState.questionIndex + 1 >= totalQuiz ? t.modul.seeResultLabel : t.modul.nextQuestionLabel}
           />
         </div>
       )}

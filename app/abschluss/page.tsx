@@ -7,20 +7,15 @@ import { Shield, Download, Trophy, Check } from 'lucide-react';
 import Surface, { ClayButton, Pill } from '@/components/Surface';
 import Waechter from '@/components/Waechter';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
+import { useTranslation } from '@/lib/i18n';
+import { useLocale } from '@/lib/locale-context';
+import { getModules } from '@/data/modules';
 
 type ProgressEntry = {
   moduleId: number;
   completed: boolean;
   score: number;
 };
-
-const MODULE_NAMES = [
-  'Einführung in den DSG',
-  'Personendaten',
-  'Risiken & Umgang',
-  'Pflichten & Meldewege',
-  'Abschlussquiz',
-];
 
 function ConfettiPiece({ delay, x }: { delay: number; x: number }) {
   const colors = ['var(--red)', 'var(--green)', 'var(--streak)', 'var(--xp)', 'var(--blue)'];
@@ -67,6 +62,11 @@ export default function AbschlussPage() {
   const [showConfetti, setShowConfetti] = useState(true);
   const router = useRouter();
   const isDesktop = useIsDesktop();
+  const t = useTranslation();
+  const { locale } = useLocale();
+  const modules = getModules(locale);
+
+  const dateLocale = locale === 'en' ? 'en-GB' : locale === 'fr' ? 'fr-CH' : 'de-CH';
 
   useEffect(() => {
     const uid = localStorage.getItem('userId');
@@ -86,11 +86,11 @@ export default function AbschlussPage() {
       .catch(console.error)
       .finally(() => setLoading(false));
 
-    const t = setTimeout(() => setShowConfetti(false), 3500);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setShowConfetti(false), 3500);
+    return () => clearTimeout(timer);
   }, [router]);
 
-  const today = new Date().toLocaleDateString('de-CH', {
+  const today = new Date().toLocaleDateString(dateLocale, {
     day: '2-digit', month: 'long', year: 'numeric',
   });
 
@@ -113,6 +113,12 @@ export default function AbschlussPage() {
       </main>
     );
   }
+
+  const stats = [
+    { label: t.abschluss.statsPoints, value: String(totalScore), suffix: '/500', color: 'var(--red)',   bg: 'var(--red-soft)'   },
+    { label: t.abschluss.statsTime,   value: '~20',              suffix: t.abschluss.statsTimeSuffix,   color: 'var(--blue)',  bg: 'var(--blue-soft)'  },
+    { label: t.abschluss.statsModules,value: '5',                suffix: '✓',    color: 'var(--green)', bg: 'var(--green-soft)' },
+  ];
 
   const maxW = isDesktop ? 640 : 480;
 
@@ -138,7 +144,7 @@ export default function AbschlussPage() {
       {/* Headline */}
       <div style={{ textAlign: 'center', marginBottom: 24 }}>
         <Pill tone="green" size="sm" style={{ marginBottom: 10 }}>
-          <Trophy size={11}/> Schulung abgeschlossen
+          <Trophy size={11}/> {t.abschluss.pillDone}
         </Pill>
         <h1 style={{
           fontSize: isDesktop ? 36 : 30,
@@ -148,10 +154,10 @@ export default function AbschlussPage() {
           margin: '0 0 8px',
           color: 'var(--text)',
         }}>
-          Herzlichen Glückwunsch, {userName}.
+          {t.abschluss.congratsTitle} {userName}.
         </h1>
         <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
-          Du hast alle 5 Module der Datenschutz-Schulung erfolgreich abgeschlossen.
+          {t.abschluss.congratsSubtitle}
         </p>
       </div>
 
@@ -178,13 +184,13 @@ export default function AbschlussPage() {
               background: 'rgba(255,255,255,0.07)',
             }}/>
             <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1px', opacity: 0.8, textTransform: 'uppercase' }}>
-              Zertifikat · MS Direct Group
+              {t.abschluss.certOrg}
             </div>
             <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.3px', marginTop: 4 }}>
-              Datenschutz-Schulung
+              {t.abschluss.certTitle}
             </div>
             <div style={{ fontSize: 12, opacity: 0.8, marginTop: 2 }}>
-              Direct2Future · {today}
+              {t.abschluss.certProgram} · {today}
             </div>
             {/* Seal */}
             <div style={{
@@ -201,7 +207,7 @@ export default function AbschlussPage() {
           {/* Body */}
           <div style={{ padding: isDesktop ? '22px 28px 24px' : '18px 22px 20px' }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-              Verliehen an
+              {t.abschluss.awardedTo}
             </div>
             <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginTop: 2, letterSpacing: '-0.4px' }}>
               {userName}
@@ -220,11 +226,7 @@ export default function AbschlussPage() {
 
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginTop: 16 }}>
-              {[
-                { label: 'Punkte', value: String(totalScore), suffix: '/500', color: 'var(--red)', bg: 'var(--red-soft)' },
-                { label: 'Zeit',   value: '~20',              suffix: 'min',  color: 'var(--blue)', bg: 'var(--blue-soft)' },
-                { label: 'Module', value: '5',                suffix: '✓',    color: 'var(--green)', bg: 'var(--green-soft)' },
-              ].map(({ label, value, suffix, color, bg }) => (
+              {stats.map(({ label, value, suffix, color, bg }) => (
                 <div key={label} style={{
                   background: bg, borderRadius: 14, padding: '12px 8px',
                   textAlign: 'center', boxShadow: 'var(--clay-sm)',
@@ -255,14 +257,14 @@ export default function AbschlussPage() {
             fontSize: 11, fontWeight: 700, color: 'var(--text-muted)',
             letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 12,
           }}>
-            Abgeschlossene Module
+            {t.abschluss.completedModules}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {MODULE_NAMES.map((name, i) => {
-              const entry = progressData.find((p) => p.moduleId === i + 1);
+            {modules.map((mod) => {
+              const entry = progressData.find((p) => p.moduleId === mod.id);
               const score = entry?.score ?? 0;
               return (
-                <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div key={mod.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div style={{
                     width: 24, height: 24, borderRadius: 8,
                     background: 'var(--green)',
@@ -271,7 +273,7 @@ export default function AbschlussPage() {
                     <Check size={13} color="#fff" strokeWidth={3.5}/>
                   </div>
                   <div style={{ flex: 1, fontSize: 13, fontWeight: 600, color: 'var(--text)', lineHeight: 1.3 }}>
-                    {name}
+                    {mod.title}
                   </div>
                   <div style={{
                     fontSize: 12, fontWeight: 800, flexShrink: 0,
@@ -290,10 +292,10 @@ export default function AbschlussPage() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <ClayButton fullWidth onClick={() => window.print()}>
           <Download size={16} color="#fff" strokeWidth={2.6}/>
-          Zertifikat herunterladen
+          {t.abschluss.btnDownload}
         </ClayButton>
         <ClayButton variant="soft" fullWidth onClick={() => router.push('/schulung')}>
-          Zur Modulübersicht
+          {t.abschluss.btnOverview}
         </ClayButton>
       </div>
     </main>

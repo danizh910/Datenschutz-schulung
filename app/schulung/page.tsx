@@ -4,11 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Flame, Zap, Lock, Check, Shield, User, AlertTriangle, Mail, Trophy } from 'lucide-react';
-import { modules } from '@/data/modules';
+import { getModules } from '@/data/modules';
+import type { Module } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
 import Waechter from '@/components/Waechter';
 import VideoEmbed from '@/components/VideoEmbed';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
+import { useTranslation } from '@/lib/i18n';
+import { useLocale } from '@/lib/locale-context';
 
 type ProgressEntry = {
   moduleId: number;
@@ -51,13 +54,14 @@ function PathConnectorSVG({
 }
 
 function ModulePathNode({
-  mod, pos, status, score, onClick,
+  mod, pos, status, score, onClick, currentLabel,
 }: {
-  mod: typeof modules[0];
+  mod: Module;
   pos: { x: number; y: number };
   status: ModuleStatus;
   score: number;
   onClick: () => void;
+  currentLabel: string;
 }) {
   const IconComp = MODULE_ICONS[mod.id - 1];
   const isClickable = status !== 'locked';
@@ -110,7 +114,7 @@ function ModulePathNode({
           whiteSpace: 'nowrap',
           zIndex: 3,
         }}>
-          Aktuell
+          {currentLabel}
           <div style={{
             position: 'absolute',
             bottom: -4, left: 12,
@@ -202,6 +206,9 @@ export default function SchulungPage() {
   const pathRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const isDesktop = useIsDesktop();
+  const t = useTranslation();
+  const { locale } = useLocale();
+  const modules = getModules(locale);
 
   useEffect(() => {
     const uid = localStorage.getItem('userId');
@@ -254,7 +261,7 @@ export default function SchulungPage() {
             <Waechter mood="thinking" size={80}/>
           </motion.div>
           <p style={{ color: 'var(--text-muted)', marginTop: 14, fontSize: 14, fontWeight: 500 }}>
-            Fortschritt wird geladen…
+            {t.schulung.loadingText}
           </p>
         </div>
       </main>
@@ -287,7 +294,7 @@ export default function SchulungPage() {
               fontSize: 11, fontWeight: 700, color: 'var(--text-muted)',
               letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 3,
             }}>
-              Direct2Future · Datenschutz-Schulung
+              {t.schulung.orgLabel}
             </div>
             <h1 style={{
               fontSize: isDesktop ? 26 : 22,
@@ -296,7 +303,7 @@ export default function SchulungPage() {
               margin: 0,
               letterSpacing: '-0.4px',
             }}>
-              Willkommen, {userName}
+              {t.schulung.welcome} {userName}
             </h1>
           </div>
           <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
@@ -348,10 +355,10 @@ export default function SchulungPage() {
           >
             <div>
               <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--green-deep)', marginBottom: 3 }}>
-                Alle Module abgeschlossen
+                {t.schulung.allDoneTitle}
               </div>
               <div style={{ fontSize: 13, color: 'var(--green-ink)', fontWeight: 500 }}>
-                Zertifikat abrufen und herunterladen
+                {t.schulung.allDoneDesc}
               </div>
             </div>
             <div style={{
@@ -363,7 +370,7 @@ export default function SchulungPage() {
               fontWeight: 700,
               flexShrink: 0,
             }}>
-              Zum Zertifikat →
+              {t.schulung.allDoneBtn}
             </div>
           </motion.div>
         )}
@@ -386,7 +393,7 @@ export default function SchulungPage() {
             fontSize: 10, fontWeight: 800, letterSpacing: '0.5px',
             textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 8,
           }}>
-            Einführungsvideo · Datenschutz-Schulung
+            {t.schulung.videoLabel}
           </div>
           <VideoEmbed
             videoId="bGHo6ahlXTI"
@@ -424,10 +431,10 @@ export default function SchulungPage() {
           lineHeight: 1.5,
         }}>
           {completedCount === 0
-            ? 'Starte mit Modul 1 und arbeite dich strukturiert durch das Schweizer Datenschutzgesetz.'
+            ? t.schulung.tipStart
             : completedCount === 5
-            ? 'Alle Module erfolgreich abgeschlossen — rufe jetzt dein Zertifikat ab.'
-            : `${completedCount} von 5 Modulen abgeschlossen — weiter so.`
+            ? t.schulung.tipDone
+            : t.schulung.tipProgress(completedCount)
           }
         </div>
       </div>
@@ -467,6 +474,7 @@ export default function SchulungPage() {
             status={getStatus(mod.id)}
             score={getScore(mod.id)}
             onClick={() => router.push(`/modul/${mod.id}`)}
+            currentLabel={t.schulung.currentLabel}
           />
         ))}
       </div>
@@ -478,7 +486,7 @@ export default function SchulungPage() {
         marginTop: 24,
         paddingBottom: 8,
       }}>
-        © 2025 MS Direct Group · Direct2Future
+        {t.schulung.footer}
       </p>
     </main>
   );
