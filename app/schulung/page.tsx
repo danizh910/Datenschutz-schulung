@@ -246,13 +246,18 @@ export default function SchulungPage() {
       <div style={{ padding: isDesktop ? '28px 40px 0' : '20px 20px 0', maxWidth: maxW, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/ms-direct-logo.svg"
-              alt="MS Direct Group"
-              width={isDesktop ? 160 : 130}
-              style={{ display: 'block', marginBottom: 8, height: 'auto' }}
-            />
+            <div style={{
+              display: 'inline-block', background: '#fff',
+              borderRadius: 10, padding: '5px 10px', marginBottom: 8,
+            }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/ms-direct-logo.png"
+                alt="MS Direct Group"
+                width={isDesktop ? 150 : 120}
+                style={{ display: 'block', height: 'auto' }}
+              />
+            </div>
             <h1 style={{ fontSize: isDesktop ? 26 : 22, fontWeight: 800, color: 'var(--text)', margin: 0, letterSpacing: '-0.4px' }}>
               {t.schulung.welcome} {userName}
             </h1>

@@ -264,7 +264,7 @@ export default function AbschlussPage() {
               <div style={{ marginBottom: 16, paddingBottom: 14, borderBottom: '1px solid #e8e8e8' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/ms-direct-logo.svg"
+                  src="/ms-direct-logo.png"
                   alt="MS Direct Group"
                   width={170}
                   style={{ display: 'block', height: 'auto' }}

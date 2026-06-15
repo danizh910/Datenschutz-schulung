@@ -74,7 +74,7 @@ export default function HandoutPage() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/ms-direct-logo.svg"
+              src="/ms-direct-logo.png"
               alt="MS Direct Group"
               width={180}
               style={{ display: 'block', height: 'auto', marginBottom: 14 }}
@@ -225,7 +225,7 @@ export default function HandoutPage() {
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/ms-direct-logo.svg"
+            src="/ms-direct-logo.png"
             alt="MS Direct Group"
             width={100}
             style={{ height: 'auto', opacity: 0.5 }}

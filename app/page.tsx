@@ -77,7 +77,7 @@ export default function LandingPage() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/ms-direct-logo.svg"
+            src="/ms-direct-logo.png"
             alt="MS Direct Group – Every order a fulfilled promise"
             width={220}
             style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
