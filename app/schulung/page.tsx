@@ -35,9 +35,10 @@ function PathConnectorSVG({
   const d = `M${x1},${y1} C${x1},${midY} ${x2},${midY} ${x2},${y2}`;
   return (
     <>
-      <path d={d} fill="none" stroke="var(--surface-sunk)" strokeWidth={6} strokeLinecap="round" strokeDasharray="10 8" vectorEffect="non-scaling-stroke" />
+      {/* Track line — visible in both light and dark mode */}
+      <path d={d} fill="none" stroke="var(--text-muted)" strokeWidth={5} strokeLinecap="round" strokeDasharray="10 8" strokeOpacity={0.35} vectorEffect="non-scaling-stroke" />
       {done && (
-        <path d={d} fill="none" stroke="var(--green)" strokeWidth={6} strokeLinecap="round" vectorEffect="non-scaling-stroke"
+        <path d={d} fill="none" stroke="var(--green)" strokeWidth={5} strokeLinecap="round" vectorEffect="non-scaling-stroke"
           style={{ filter: 'drop-shadow(0 0 5px rgba(21,184,134,0.45))' }} />
       )}
     </>
@@ -223,16 +224,18 @@ export default function SchulungPage() {
     );
   }
 
-  const stepY = isDesktop ? 168 : 150;
-  const weave = isDesktop ? 16 : 18;
+  // Snake path uses fixed values independent of screen width.
+  // x is in 0-100 (= %) so it matches CSS left:X% directly — no measurement needed.
+  const WEAVE = 10; // gentle ±10% oscillation from center
+  const STEP_Y = 160; // px between module circle centers
   const pathPositions = modules.map((_, i) => {
     const isLast = i === modules.length - 1;
     return {
-      x: isLast ? 50 : 50 + (i % 2 === 0 ? -weave : weave),
-      y: 40 + i * stepY,
+      x: isLast ? 50 : 50 + (i % 2 === 0 ? -WEAVE : WEAVE),
+      y: 40 + i * STEP_Y,
     };
   });
-  const pathHeight = pathPositions[pathPositions.length - 1].y + (isDesktop ? 150 : 140);
+  const pathHeight = pathPositions[pathPositions.length - 1].y + 140;
   const maxW = isDesktop ? 860 : 480;
   const barColor = progressPct === 100 ? 'var(--green)' : progressPct >= 50 ? 'var(--xp)' : 'var(--red)';
 
@@ -339,11 +342,12 @@ export default function SchulungPage() {
       </div>
 
       {/* ─── Snake Path ─── */}
+      {/* Container: narrow, centered. x=0-100 in viewBox == left:0%-100% in CSS — same reference, no measurement. */}
       <div
-        style={{ position: 'relative', maxWidth: isDesktop ? 420 : maxW, margin: '0 auto', padding: 0, height: pathHeight }}
+        style={{ position: 'relative', maxWidth: 360, margin: '0 auto', padding: 0, height: pathHeight }}
       >
         <svg
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'visible' }}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'visible' }}
           viewBox={`0 0 100 ${pathHeight}`}
           preserveAspectRatio="none"
         >
