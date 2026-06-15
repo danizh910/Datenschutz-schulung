@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Shield, Download, Trophy, Check } from 'lucide-react';
+import { Shield, Download, Trophy, Check, FileText } from 'lucide-react';
 import Surface, { ClayButton, Pill } from '@/components/Surface';
 import Waechter from '@/components/Waechter';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
@@ -171,9 +171,9 @@ export default function AbschlussPage() {
         <Surface padding={0} radius={24}>
           {/* Header band */}
           <div style={{
-            background: 'linear-gradient(135deg, var(--red), var(--red-deep))',
+            background: 'linear-gradient(135deg, var(--navy), var(--navy-deep))',
             borderRadius: '22px 22px 0 0',
-            padding: isDesktop ? '24px 28px' : '20px 22px',
+            padding: isDesktop ? '20px 28px' : '16px 22px',
             color: '#fff',
             position: 'relative',
             overflow: 'hidden',
@@ -181,15 +181,29 @@ export default function AbschlussPage() {
             <div style={{
               position: 'absolute', top: -24, right: -24,
               width: 120, height: 120, borderRadius: '50%',
-              background: 'rgba(255,255,255,0.07)',
+              background: 'rgba(255,255,255,0.05)',
             }}/>
-            <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1px', opacity: 0.8, textTransform: 'uppercase' }}>
+            {/* Logo – white filter on dark background */}
+            <div style={{ marginBottom: 10 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/ms-direct-logo.svg"
+                alt="MS Direct Group"
+                width={150}
+                style={{
+                  height: 'auto',
+                  filter: 'brightness(0) invert(1)',
+                  opacity: 0.92,
+                }}
+              />
+            </div>
+            <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1px', opacity: 0.75, textTransform: 'uppercase' }}>
               {t.abschluss.certOrg}
             </div>
-            <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.3px', marginTop: 4 }}>
+            <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: '-0.3px', marginTop: 4 }}>
               {t.abschluss.certTitle}
             </div>
-            <div style={{ fontSize: 12, opacity: 0.8, marginTop: 2 }}>
+            <div style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>
               {t.abschluss.certProgram} · {today}
             </div>
             {/* Seal */}
@@ -294,7 +308,16 @@ export default function AbschlussPage() {
           <Download size={16} color="#fff" strokeWidth={2.6}/>
           {t.abschluss.btnDownload}
         </ClayButton>
-        <ClayButton variant="soft" fullWidth onClick={() => router.push('/schulung')}>
+        <ClayButton
+          variant="soft"
+          fullWidth
+          onClick={() => window.open('/handout', '_blank')}
+          style={{ border: '1.5px solid var(--navy-soft)' }}
+        >
+          <FileText size={16} color="var(--navy)" strokeWidth={2.4}/>
+          <span style={{ color: 'var(--navy)' }}>{t.abschluss.btnHandout}</span>
+        </ClayButton>
+        <ClayButton variant="ghost" fullWidth onClick={() => router.push('/schulung')}>
           {t.abschluss.btnOverview}
         </ClayButton>
       </div>

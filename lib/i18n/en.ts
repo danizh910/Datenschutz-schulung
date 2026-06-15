@@ -71,7 +71,12 @@ export const en = {
     statsTimeSuffix: 'min',
     completedModules: 'Completed modules',
     btnDownload: 'Download certificate',
+    btnHandout: 'Download handout',
     btnOverview: 'Back to overview',
+  },
+  schulungVideo: {
+    noteTitle: 'Training Video',
+    note: 'This video provides an overview of Swiss data protection law. A full English translation of the training content will be available soon.',
   },
 } as const;
 

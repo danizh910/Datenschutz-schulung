@@ -71,7 +71,12 @@ export const de = {
     statsTimeSuffix: 'min',
     completedModules: 'Abgeschlossene Module',
     btnDownload: 'Zertifikat herunterladen',
+    btnHandout: 'Handout herunterladen',
     btnOverview: 'Zur Modulübersicht',
+  },
+  schulungVideo: {
+    note: '',
+    noteTitle: '',
   },
 } as const;
 

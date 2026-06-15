@@ -71,6 +71,11 @@ export const pt = {
     statsTimeSuffix: 'min',
     completedModules: 'Módulos concluídos',
     btnDownload: 'Descarregar certificado',
+    btnHandout: 'Descarregar material',
     btnOverview: 'Voltar à vista geral',
+  },
+  schulungVideo: {
+    noteTitle: 'Vídeo de formação',
+    note: 'Este vídeo fornece uma visão geral da lei suíça de proteção de dados. A tradução completa para português estará disponível em breve.',
   },
 } as const;

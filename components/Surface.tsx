@@ -123,7 +123,7 @@ type ClayButtonProps = {
 };
 
 const btnBg: Record<ButtonVariant, string> = {
-  primary: 'var(--red)',
+  primary: 'var(--navy)',
   success: 'var(--green)',
   soft:    'var(--surface-soft)',
   ghost:   'transparent',

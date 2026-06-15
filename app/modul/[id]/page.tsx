@@ -300,12 +300,25 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
                   </p>
                 </Surface>
 
-                {/* YouTube video for module 1 first slide */}
-                {mod.videoId && learnIndex === 0 && (
+                {/* YouTube video – DE: module video (module 1 only), non-DE: overview video on all modules */}
+                {locale === 'de' && mod.videoId && learnIndex === 0 && (
                   <VideoEmbed
                     videoId={mod.videoId}
                     title={t.modul.videoTitle(mod.title)}
                   />
+                )}
+                {locale !== 'de' && learnIndex === 0 && (
+                  <div>
+                    <VideoEmbed videoId="YJInlE99vSs" title={t.schulungVideo.noteTitle}/>
+                    {t.schulungVideo.note && (
+                      <p style={{
+                        marginTop: 8, fontSize: 12, color: 'var(--text-muted)',
+                        lineHeight: 1.55, fontStyle: 'italic',
+                      }}>
+                        {t.schulungVideo.note}
+                      </p>
+                    )}
+                  </div>
                 )}
 
                 {/* InfoBox if this learn step has one */}

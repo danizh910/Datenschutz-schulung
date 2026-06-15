@@ -32,6 +32,17 @@
   --blue:         #2E6CF6;
   --blue-soft:    #E1ECFF;
 
+  /* ── MS Direct Brand Colors ── */
+  --navy:         #1D3461;
+  --navy-deep:    #152549;
+  --navy-soft:    #E8EDF5;
+  --navy-ink:     #0D1E3A;
+  --pink:         #D66878;
+  --pink-soft:    #FAE8EC;
+  --cyan:         #29B3E8;
+  --cyan-soft:    #E3F5FD;
+  --glow-navy:    0 0 0 4px rgba(29,52,97,0.18), 0 12px 24px -8px rgba(29,52,97,0.35);
+
   --clay:         0 1px 0 rgba(255,255,255,0.85) inset, 0 -2px 0 rgba(20,15,10,0.04) inset, 0 12px 24px -10px rgba(40,28,18,0.18), 0 2px 6px rgba(40,28,18,0.06);
   --clay-lg:      0 1px 0 rgba(255,255,255,0.9) inset, 0 -3px 0 rgba(20,15,10,0.05) inset, 0 24px 40px -16px rgba(40,28,18,0.22), 0 4px 12px rgba(40,28,18,0.08);
   --clay-inset:   0 2px 4px rgba(20,15,10,0.08) inset, 0 -1px 0 rgba(255,255,255,0.6) inset;
@@ -72,6 +83,17 @@
   --blue:         #5B8DEF;
   --blue-soft:    rgba(91,141,239,0.18);
 
+  /* ── MS Direct Brand Colors (dark) ── */
+  --navy:         #4A72B0;
+  --navy-deep:    #3A5A94;
+  --navy-soft:    rgba(74,114,176,0.18);
+  --navy-ink:     #A8C0E8;
+  --pink:         #E88A98;
+  --pink-soft:    rgba(232,138,152,0.18);
+  --cyan:         #4FC4F0;
+  --cyan-soft:    rgba(79,196,240,0.18);
+  --glow-navy:    0 0 0 4px rgba(74,114,176,0.25), 0 12px 24px -8px rgba(74,114,176,0.45);
+
   --clay:         0 1px 0 rgba(255,255,255,0.06) inset, 0 -2px 0 rgba(0,0,0,0.35) inset, 0 14px 28px -10px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.35);
   --clay-lg:      0 1px 0 rgba(255,255,255,0.07) inset, 0 -3px 0 rgba(0,0,0,0.4) inset, 0 26px 44px -16px rgba(0,0,0,0.65), 0 4px 14px rgba(0,0,0,0.4);
   --clay-inset:   0 2px 4px rgba(0,0,0,0.45) inset, 0 -1px 0 rgba(255,255,255,0.04) inset;
@@ -99,6 +121,14 @@
   --color-xp:           var(--xp);
   --color-blue:         var(--blue);
   --color-blue-soft:    var(--blue-soft);
+  --color-navy:         var(--navy);
+  --color-navy-deep:    var(--navy-deep);
+  --color-navy-soft:    var(--navy-soft);
+  --color-pink:         var(--pink);
+  --color-pink-soft:    var(--pink-soft);
+  --color-cyan:         var(--cyan);
+  --color-cyan-soft:    var(--cyan-soft);
+  --shadow-glow-navy:   var(--glow-navy);
   --shadow-clay:        var(--clay);
   --shadow-clay-lg:     var(--clay-lg);
   --shadow-clay-inset:  var(--clay-inset);
@@ -145,7 +175,7 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-subtle); }
 ::-webkit-scrollbar-thumb { background: var(--surface-sunk); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--red); }
+::-webkit-scrollbar-thumb:hover { background: var(--navy); }
 
 /* ─── Responsive helpers ─── */
 .resp-desktop { display: none !important; }

@@ -71,6 +71,11 @@ export const hr = {
     statsTimeSuffix: 'min',
     completedModules: 'Dovršeni moduli',
     btnDownload: 'Preuzmi certifikat',
+    btnHandout: 'Preuzmi materijal',
     btnOverview: 'Natrag na pregled',
+  },
+  schulungVideo: {
+    noteTitle: 'Video o obuci',
+    note: 'Ovaj video daje pregled švicarskog zakona o zaštiti podataka. Potpuni prijevod obuke na hrvatski bit će uskoro dostupan.',
   },
 } as const;

@@ -68,22 +68,20 @@ export default function LandingPage() {
     }}>
       <div style={{ width: '100%', maxWidth: isDesktop ? 560 : 440 }}>
 
+        {/* MS Direct Logo */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           style={{ textAlign: 'center', marginBottom: 24 }}
         >
-          <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.8px',
-            textTransform: 'uppercase', color: 'var(--text-muted)',
-            padding: '5px 12px', borderRadius: 999,
-            background: 'var(--surface-soft)',
-            border: '1px solid var(--border)',
-          }}>
-            {t.landing.orgBadge}
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/ms-direct-logo.svg"
+            alt="MS Direct Group – Every order a fulfilled promise"
+            width={220}
+            style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+          />
         </motion.div>
 
         <motion.div
@@ -179,14 +177,14 @@ export default function LandingPage() {
                     width: '100%',
                     padding: '14px 16px',
                     borderRadius: 14,
-                    border: `2px solid ${focused ? 'var(--red)' : 'var(--border)'}`,
+                    border: `2px solid ${focused ? 'var(--navy)' : 'var(--border)'}`,
                     background: 'var(--surface-soft)',
                     color: 'var(--text)',
                     fontSize: 15,
                     fontFamily: 'inherit',
                     outline: 'none',
                     minHeight: 52,
-                    boxShadow: focused ? 'var(--glow-red)' : 'var(--clay-inset)',
+                    boxShadow: focused ? 'var(--glow-navy)' : 'var(--clay-inset)',
                     transition: 'border-color 0.2s, box-shadow 0.2s',
                   }}
                 />

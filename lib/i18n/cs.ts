@@ -81,6 +81,11 @@ export const cs = {
     statsTimeSuffix: 'min',
     completedModules: 'Dokončené moduly',
     btnDownload: 'Stáhnout certifikát',
+    btnHandout: 'Stáhnout podklady',
     btnOverview: 'Zpět na přehled',
+  },
+  schulungVideo: {
+    noteTitle: 'Školicí video',
+    note: 'Toto video poskytuje přehled švýcarského zákona o ochraně osobních údajů. Úplný překlad školení do češtiny bude brzy k dispozici.',
   },
 } as const;

@@ -71,7 +71,12 @@ export const fr = {
     statsTimeSuffix: "min",
     completedModules: "Modules complétés",
     btnDownload: "Télécharger le certificat",
+    btnHandout: "Télécharger le document",
     btnOverview: "Retour à l'aperçu",
+  },
+  schulungVideo: {
+    noteTitle: 'Vidéo de formation',
+    note: 'Cette vidéo donne un aperçu de la loi suisse sur la protection des données. Une traduction complète en français sera bientôt disponible.',
   },
 } as const;
 

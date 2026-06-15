@@ -54,9 +54,9 @@ function ModulePathNode({
   const isClickable = status !== 'locked';
   const badge = status === 'done' && score > 0 ? scoreBadge(score) : null;
 
-  const circleBg = status === 'done' ? 'var(--green)' : status === 'current' ? 'var(--red)' : 'var(--surface-sunk)';
+  const circleBg = status === 'done' ? 'var(--green)' : status === 'current' ? 'var(--navy)' : 'var(--surface-sunk)';
   const circleFg = status === 'locked' ? 'var(--text-subtle)' : '#fff';
-  const circleGlow = status === 'done' ? 'var(--glow-green)' : status === 'current' ? 'var(--glow-red)' : 'none';
+  const circleGlow = status === 'done' ? 'var(--glow-green)' : status === 'current' ? 'var(--glow-navy)' : 'none';
 
   return (
     <div style={{
@@ -70,7 +70,7 @@ function ModulePathNode({
         <div style={{
           position: 'absolute', width: 106, height: 106,
           top: -13, left: '50%', marginLeft: -53,
-          borderRadius: '50%', background: 'var(--red)', opacity: 0.13,
+          borderRadius: '50%', background: 'var(--navy)', opacity: 0.13,
           animation: 'wPulse 2s ease-out infinite', pointerEvents: 'none',
         }}/>
       )}
@@ -79,16 +79,16 @@ function ModulePathNode({
       {status === 'current' && (
         <div style={{
           position: 'absolute', top: -46, left: '50%', transform: 'translateX(-50%)',
-          background: 'var(--red)', color: '#fff',
+          background: 'var(--navy)', color: '#fff',
           padding: '4px 12px', borderRadius: 8,
           fontSize: 10, fontWeight: 800, letterSpacing: '0.6px', whiteSpace: 'nowrap',
-          boxShadow: '0 2px 10px rgba(225,29,46,0.4)', zIndex: 3,
+          boxShadow: '0 2px 10px rgba(29,52,97,0.4)', zIndex: 3,
         }}>
           {currentLabel}
           <div style={{
             position: 'absolute', bottom: -4, left: '50%',
             transform: 'translateX(-50%) rotate(45deg)',
-            width: 8, height: 8, background: 'var(--red)',
+            width: 8, height: 8, background: 'var(--navy)',
           }}/>
         </div>
       )}
@@ -149,7 +149,7 @@ function ModulePathNode({
         boxShadow: 'var(--clay-sm)',
         fontSize: 12, fontWeight: 700,
         color: status === 'locked' ? 'var(--text-subtle)' : 'var(--text)',
-        border: status === 'current' ? '1.5px solid rgba(225,29,46,0.4)' : '1px solid var(--border-soft)',
+        border: status === 'current' ? '1.5px solid rgba(29,52,97,0.35)' : '1px solid var(--border-soft)',
         maxWidth: 170, textAlign: 'center',
         lineHeight: 1.35,
         wordBreak: 'break-word',
@@ -246,9 +246,13 @@ export default function SchulungPage() {
       <div style={{ padding: isDesktop ? '28px 40px 0' : '20px 20px 0', maxWidth: maxW, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 3 }}>
-              {t.schulung.orgLabel}
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/ms-direct-logo.svg"
+              alt="MS Direct Group"
+              width={isDesktop ? 160 : 130}
+              style={{ display: 'block', marginBottom: 8, height: 'auto' }}
+            />
             <h1 style={{ fontSize: isDesktop ? 26 : 22, fontWeight: 800, color: 'var(--text)', margin: 0, letterSpacing: '-0.4px' }}>
               {t.schulung.welcome} {userName}
             </h1>
@@ -310,9 +314,20 @@ export default function SchulungPage() {
       <div style={{ padding: isDesktop ? '0 40px' : '0 20px', maxWidth: maxW, margin: '0 auto 22px' }}>
         <div style={{ background: 'var(--surface)', borderRadius: 20, padding: '14px 16px 16px', boxShadow: 'var(--clay-sm)', border: '1px solid var(--border-soft)' }}>
           <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.5px', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 8 }}>
-            {t.schulung.videoLabel}
+            {locale === 'de' ? t.schulung.videoLabel : t.schulungVideo.noteTitle}
           </div>
-          <VideoEmbed videoId="bGHo6ahlXTI" title="Einführungsvideo: Datenschutz-Schulung MS Direct Group"/>
+          <VideoEmbed
+            videoId={locale === 'de' ? 'bGHo6ahlXTI' : 'YJInlE99vSs'}
+            title={locale === 'de' ? 'Einführungsvideo: Datenschutz-Schulung MS Direct Group' : t.schulungVideo.noteTitle}
+          />
+          {locale !== 'de' && t.schulungVideo.note && (
+            <p style={{
+              marginTop: 10, fontSize: 12, color: 'var(--text-muted)',
+              lineHeight: 1.55, fontStyle: 'italic',
+            }}>
+              {t.schulungVideo.note}
+            </p>
+          )}
         </div>
       </div>
 

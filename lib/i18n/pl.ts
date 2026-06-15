@@ -82,6 +82,11 @@ export const pl = {
     statsTimeSuffix: 'min',
     completedModules: 'Ukończone moduły',
     btnDownload: 'Pobierz certyfikat',
+    btnHandout: 'Pobierz materiały',
     btnOverview: 'Powrót do przeglądu',
+  },
+  schulungVideo: {
+    noteTitle: 'Film szkoleniowy',
+    note: 'Ten film zawiera przegląd szwajcarskiej ustawy o ochronie danych. Pełne tłumaczenie szkolenia na język polski będzie wkrótce dostępne.',
   },
 } as const;
