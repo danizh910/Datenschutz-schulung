@@ -317,7 +317,7 @@ export default function AbschlussPage() {
           <FileText size={16} color="var(--navy)" strokeWidth={2.4}/>
           <span style={{ color: 'var(--navy)' }}>{t.abschluss.btnHandout}</span>
         </ClayButton>
-        <ClayButton variant="ghost" fullWidth onClick={() => router.push('/schulung')}>
+        <ClayButton variant="soft" fullWidth onClick={() => router.push('/schulung')}>
           {t.abschluss.btnOverview}
         </ClayButton>
       </div>

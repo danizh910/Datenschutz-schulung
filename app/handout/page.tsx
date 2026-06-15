@@ -31,7 +31,7 @@ export default function HandoutPage() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
       }}>
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push('/schulung')}
           style={{
             display: 'flex', alignItems: 'center', gap: 6,
             background: 'rgba(255,255,255,0.12)', color: '#fff',
@@ -40,7 +40,7 @@ export default function HandoutPage() {
           }}
         >
           <ArrowLeft size={15} strokeWidth={2.5}/>
-          Zurück
+          Zur Übersicht
         </button>
         <button
           onClick={() => window.print()}
