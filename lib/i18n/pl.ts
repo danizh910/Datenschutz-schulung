@@ -1,0 +1,87 @@
+export const pl = {
+  landing: {
+    orgBadge: 'MS Direct Group · Direct2Future',
+    title: 'Szkolenie z ochrony danych',
+    subtitle: 'Interaktywne szkolenie certyfikacyjne z zakresu szwajcarskiej ustawy o ochronie danych (DSG) dla pracowników MS Direct Group.',
+    labelName: 'Imię i nazwisko',
+    namePlaceholder: 'np. Anna Müller',
+    nameError: 'Proszę wpisać co najmniej 2 znaki.',
+    btnStart: 'Rozpocznij szkolenie',
+    btnStarting: 'Uruchamianie…',
+    disclaimer: 'Podane dane są używane wyłącznie do ewidencji szkolenia.',
+    footer: '© 2025 MS Direct Group · Direct2Future · Szkolenie z ochrony danych',
+    features: {
+      modules: {
+        label: (n: number) => {
+          if (n === 1) return `${n} moduł`;
+          if (n % 100 >= 12 && n % 100 <= 14) return `${n} modułów`;
+          if (n % 10 >= 2 && n % 10 <= 4) return `${n} moduły`;
+          return `${n} modułów`;
+        },
+        desc: 'Podstawy DSG',
+      },
+      time: { label: '~20 min', desc: 'Czas nauki' },
+      cert: { label: 'Certyfikat', desc: 'Do pobrania' },
+    },
+  },
+  schulung: {
+    orgLabel: 'Direct2Future · Szkolenie z ochrony danych',
+    welcome: 'Witamy,',
+    tipStart: 'Zacznij od modułu 1 i systematycznie przechodź przez szwajcarską ustawę o ochronie danych.',
+    tipDone: 'Wszystkie moduły ukończone — pobierz teraz swój certyfikat.',
+    tipProgress: (done: number, total: number) => `${done} z ${total} modułów ukończono — tak dalej!`,
+    allDoneTitle: 'Wszystkie moduły ukończone',
+    allDoneDesc: 'Uzyskaj i pobierz certyfikat',
+    allDoneBtn: 'Do certyfikatu →',
+    footer: '© 2025 MS Direct Group · Direct2Future',
+    currentLabel: 'Bieżący',
+    loadingText: 'Ładowanie postępu…',
+    videoLabel: 'Film wprowadzający · Szkolenie z ochrony danych',
+  },
+  modul: {
+    backLabel: 'Wstecz',
+    modulOf: (id: number, total: number) => `Moduł ${id} z ${total}`,
+    lessonOf: (current: number, total: number) => `Lekcja ${current} / ${total}`,
+    questionOf: (current: number, total: number) => `Pytanie ${current} z ${total}`,
+    multiHint: '· Kilka poprawnych odpowiedzi',
+    hintLabel: 'Uwaga',
+    hintText: 'Quiz sprawdza rozumienie zasady — nie trzeba uczyć się definicji na pamięć.',
+    btnNext: 'Dalej',
+    btnToQuiz: 'Do quizu',
+    btnCheckAnswer: 'Sprawdź odpowiedź',
+    btnOverview: 'Powrót do przeglądu →',
+    btnSaving: 'Zapisywanie…',
+    btnRetry: 'Powtórz moduł',
+    donePassed: 'Świetna robota!',
+    donePerfect: 'Doskonale! 🎉',
+    doneFailed: 'Moduł niezaliczony',
+    doneFailedDesc: 'Nie udzielono żadnej poprawnej odpowiedzi. Proszę powtórzyć moduł i spróbować ponownie.',
+    doneCorrect: (correct: number, total: number) => {
+      const q = correct === 1 ? 'pytanie' : correct % 100 >= 12 && correct % 100 <= 14 ? 'pytań' : correct % 10 >= 2 && correct % 10 <= 4 ? 'pytania' : 'pytań';
+      return `${correct} ${q} z ${total} odpowiedziano poprawnie`;
+    },
+    pillDone: 'Moduł ukończony',
+    pillFailed: 'Niezaliczone',
+    nextQuestionLabel: 'Następne pytanie →',
+    seeResultLabel: 'Zobacz wynik →',
+    videoTitle: (moduleTitle: string) => `Film wprowadzający: ${moduleTitle}`,
+    globalPct: (pct: number) => `${pct}% ukończono`,
+    notFound: 'Moduł nie został znaleziony.',
+  },
+  abschluss: {
+    certOrg: 'Certyfikat · MS Direct Group',
+    certTitle: 'Szkolenie z ochrony danych',
+    certProgram: 'Direct2Future',
+    congratsTitle: 'Gratulujemy,',
+    congratsSubtitle: (total: number) => `Ukończyłeś/aś wszystkie ${total} moduły szkolenia z ochrony danych.`,
+    pillDone: 'Szkolenie ukończone',
+    awardedTo: 'Przyznano',
+    statsPoints: 'Punkty',
+    statsTime: 'Czas',
+    statsModules: 'Moduły',
+    statsTimeSuffix: 'min',
+    completedModules: 'Ukończone moduły',
+    btnDownload: 'Pobierz certyfikat',
+    btnOverview: 'Powrót do przeglądu',
+  },
+} as const;
