@@ -29,6 +29,7 @@ export const en = {
     currentLabel: 'Current',
     loadingText: 'Loading progress…',
     videoLabel: 'Introductory video · Data Protection Training',
+    progressLabel: (done: number, total: number) => `${done} / ${total} modules completed`,
   },
   modul: {
     backLabel: 'Back',

@@ -6,8 +6,8 @@ export async function POST(req: NextRequest) {
   try {
     const { name } = await req.json();
 
-    if (!name || typeof name !== 'string' || name.trim().length < 2) {
-      return NextResponse.json({ error: 'Name muss mindestens 2 Zeichen lang sein.' }, { status: 400 });
+    if (!name || typeof name !== 'string' || name.trim().length < 2 || name.trim().length > 80) {
+      return NextResponse.json({ error: 'Name muss zwischen 2 und 80 Zeichen lang sein.' }, { status: 400 });
     }
 
     const db = getDb();

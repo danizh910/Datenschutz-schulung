@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Obligations de notification en cas de violation",
-        text: "En interne — les incidents ou suspicions d'incident doivent être signalés immédiatement au délégué à la protection des données ou au supérieur hiérarchique. En externe — la notification à l'autorité de surveillance (PFPDT) et aux personnes concernées est assurée par le délégué, si nécessaire, et toujours rapidement.",
+        text: "En interne — les incidents ou suspicions d'incident doivent être signalés immédiatement au délégué à la protection des données ou au supérieur hiérarchique. En externe — c'est le délégué à la protection des données qui évalue et décide si et quand une notification au PFPDT ou aux personnes concernées est nécessaire.",
         infoBox: {
           variant: "warnung",
-          title: "Règle des 72 heures",
-          text: "L'entreprise ne dispose que de 72 heures après la découverte d'une violation pour la notifier au PFPDT — signalez donc immédiatement en interne !",
+          title: "Obligation de notification",
+          text: "Signalez immédiatement en interne tout incident de protection des données ou soupçon d'incident. Le délégué à la protection des données évalue si une notification au PFPDT est nécessaire. Si une notification est requise, elle doit être effectuée dès que possible.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Attendre de voir si quelqu'un d'autre le remarque", "Corriger soi-même sans en informer personne", "Informer immédiatement le supérieur hiérarchique ou le délégué à la protection des données", "Envoyer un e-mail à tous les collaborateurs"],
         correctIndexes: [2],
-        explanation: "Un signalement interne rapide est crucial. L'entreprise n'a que 72 heures pour la notification au PFPDT. Corriger soi-même et garder le silence n'est pas une option — cela aggrave les choses.",
+        explanation: "Un signalement interne rapide est crucial. La LPD suisse ne prévoit aucun délai fixe de 72 heures — c'est une règle du RGPD européen. Les violations présentant un risque élevé doivent être notifiées au PFPDT dès que possible. Corriger soi-même et garder le silence n'est pas une option.",
       },
       {
         question: "Que signifie la «protection des données dès la conception» ?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "Comment signaler un incident ?",
-        text: "Signalez immédiatement les incidents liés à la protection des données ou les suspicions d'incident en interne au délégué ou à votre supérieur hiérarchique. Plus le signalement est rapide, mieux l'entreprise peut réagir — elle ne dispose que de 72 heures pour la notification externe au PFPDT.",
+        text: "Signalez immédiatement les incidents liés à la protection des données ou les suspicions d'incident en interne au délégué ou à votre supérieur hiérarchique. Plus le signalement est rapide, mieux l'entreprise peut réagir. Le délégué à la protection des données évalue si et quand une notification au PFPDT est nécessaire.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + écran verrouillé sont la base absolue en télétravail. Les clés USB privées et les appareils déverrouillés constituent des violations de sécurité manifestes.",
       },
       {
-        question: "Dans quel délai l'entreprise doit-elle signaler une violation de données au PFPDT ?",
+        question: "Qu'exige la LPD suisse pour la notification d'une violation de données au PFPDT ?",
         type: "single",
-        options: ["7 jours", "72 heures", "30 jours"],
-        correctIndexes: [1],
-        explanation: "Le délai de 72 heures s'applique par analogie avec le RGPD européen. C'est pourquoi un signalement interne doit être effectué immédiatement.",
+        options: ["Un délai fixe de 72 heures, comme dans le RGPD européen", "Les violations de données n'ont jamais besoin d'être signalées à l'extérieur", "La notification doit être effectuée dès que possible s'il existe un risque élevé"],
+        correctIndexes: [2],
+        explanation: "La LPD suisse ne prévoit AUCUN délai fixe de 72 heures — c'est une règle du RGPD européen. Les violations susceptibles de présenter un risque élevé pour la personnalité ou les droits fondamentaux doivent être notifiées au PFPDT dès que possible.",
       },
       {
         question: "Que devez-vous faire en cas de suspicion de phishing ?",

@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Obowiązki zgłaszania w przypadku naruszenia",
-        text: "Wewnętrznie — incydenty lub podejrzenia incydentów należy niezwłocznie zgłosić inspektorowi ochrony danych lub bezpośredniemu przełożonemu. Zewnętrznie — zgłoszenie do organu nadzorczego (PFPDT) i do osób, których dane dotyczą, zapewnia inspektor, w razie potrzeby, i zawsze bez zbędnej zwłoki.",
+        text: "Wewnętrznie — incydenty lub podejrzenia incydentów należy niezwłocznie zgłosić inspektorowi ochrony danych lub bezpośredniemu przełożonemu. Zewnętrznie — czy i kiedy dokonać zgłoszenia do organu nadzorczego (PFPDT) lub do osób, których dane dotyczą, ocenia i decyduje inspektor ochrony danych.",
         infoBox: {
           variant: "warnung",
-          title: "Zasada 72 godzin",
-          text: "Firma ma tylko 72 godziny od wykrycia naruszenia na zgłoszenie go do PFPDT — natychmiast zgłaszaj wewnętrznie!",
+          title: "Obowiązek zgłaszania",
+          text: "Niezwłocznie zgłoś wewnętrznie każdy incydent lub podejrzenie incydentu związanego z ochroną danych. Inspektor ochrony danych oceni, czy zgłoszenie do PFPDT jest konieczne. Jeśli zgłoszenie jest wymagane, musi zostać dokonane jak najszybciej.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Zaczekać, czy ktoś inny to zauważy", "Samodzielnie naprawić bez informowania kogokolwiek", "Niezwłocznie poinformować bezpośredniego przełożonego lub inspektora ochrony danych", "Wysłać e-mail do wszystkich pracowników"],
         correctIndexes: [2],
-        explanation: "Natychmiastowe wewnętrzne zgłoszenie jest kluczowe. Firma ma tylko 72 godziny na zgłoszenie do PFPDT. Samodzielne naprawienie w milczeniu nie jest opcją — pogarsza sytuację.",
+        explanation: "Natychmiastowe wewnętrzne zgłoszenie jest kluczowe. Szwajcarski DSG nie przewiduje sztywnego terminu 72 godzin — to zasada europejskiego RODO. Naruszenia niosące wysokie ryzyko muszą być zgłoszone do PFPDT jak najszybciej. Samodzielne naprawienie w milczeniu nie jest opcją.",
       },
       {
         question: "Co oznacza «ochrona danych w fazie projektowania»?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "Jak zgłosić incydent?",
-        text: "Incydenty związane z ochroną danych lub podejrzenia incydentów zgłaszaj niezwłocznie wewnętrznie inspektorowi lub bezpośredniemu przełożonemu. Im szybsze zgłoszenie, tym lepiej firma może zareagować — ma tylko 72 godziny na zewnętrzne zgłoszenie do PFPDT.",
+        text: "Incydenty związane z ochroną danych lub podejrzenia incydentów zgłaszaj niezwłocznie wewnętrznie inspektorowi lub bezpośredniemu przełożonemu. Im szybsze zgłoszenie, tym lepiej firma może zareagować. Inspektor ochrony danych ocenia, czy i kiedy konieczne jest zewnętrzne zgłoszenie do PFPDT.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + zablokowany ekran to absolutna podstawa podczas pracy zdalnej. Prywatne dyski USB i odblokowane urządzenia to oczywiste naruszenia bezpieczeństwa.",
       },
       {
-        question: "W jakim terminie firma musi zgłosić naruszenie ochrony danych do PFPDT?",
+        question: "Czego wymaga szwajcarski DSG w zakresie zgłaszania naruszenia ochrony danych do PFPDT?",
         type: "single",
-        options: ["7 dni", "72 godziny", "30 dni"],
-        correctIndexes: [1],
-        explanation: "Termin 72 godzin stosuje się analogicznie do europejskiego RODO. Dlatego wewnętrzne zgłoszenie musi nastąpić niezwłocznie.",
+        options: ["Sztywnego terminu 72 godzin, jak w europejskim RODO", "Naruszeń ochrony danych nigdy nie trzeba zgłaszać zewnętrznie", "Zgłoszenia należy dokonać jak najszybciej, jeśli istnieje wysokie ryzyko"],
+        correctIndexes: [2],
+        explanation: "Szwajcarski DSG NIE przewiduje sztywnego terminu 72 godzin — to zasada europejskiego RODO. Naruszenia mogące powodować wysokie ryzyko dla osobowości lub praw podstawowych muszą być zgłaszane do PFPDT jak najszybciej.",
       },
       {
         question: "Co zrobić w przypadku podejrzenia phishingu?",

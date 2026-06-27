@@ -56,7 +56,7 @@ export default function ModulPage({ params }: { params: Promise<{ id: string }> 
   useEffect(() => {
     const uid = localStorage.getItem('userId');
     if (!uid) { router.replace('/'); return; }
-    setUserId(uid);
+    setUserId(uid); // eslint-disable-line react-hooks/set-state-in-effect
 
     fetch(`/api/progress?userId=${uid}`)
       .then((r) => r.json())

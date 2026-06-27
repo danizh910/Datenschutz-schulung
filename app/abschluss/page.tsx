@@ -58,7 +58,7 @@ export default function AbschlussPage() {
     const uid = localStorage.getItem('userId');
     const uname = localStorage.getItem('userName');
     if (!uid) { router.replace('/'); return; }
-    setUserName(uname || '');
+    setUserName(uname || ''); // eslint-disable-line react-hooks/set-state-in-effect
 
     fetch(`/api/progress?userId=${uid}`)
       .then((r) => r.json())

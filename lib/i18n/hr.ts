@@ -29,6 +29,7 @@ export const hr = {
     currentLabel: 'Trenutno',
     loadingText: 'Učitavanje napretka…',
     videoLabel: 'Uvodni video · Osposobljavanje o zaštiti podataka',
+    progressLabel: (done: number, total: number) => `${done} / ${total} modula završeno`,
   },
   modul: {
     backLabel: 'Natrag',

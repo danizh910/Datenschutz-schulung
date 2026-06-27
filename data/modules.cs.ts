@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Povinnosti hlášení při porušení",
-        text: "Interně — incidenty nebo podezření na incidenty musí být ihned nahlášeny pověřenci pro ochranu dat nebo nadřízenému. Externě — oznámení dozorovému orgánu (PFPDT) a dotčeným osobám zajišťuje pověřenec, je-li to nutné, a vždy bezodkladně.",
+        text: "Interně — incidenty nebo podezření na incidenty musí být ihned nahlášeny pověřenci pro ochranu dat nebo nadřízenému. Externě — zda a kdy je třeba oznámit dozorový orgán (PFPDT) nebo dotčené osoby, posuzuje a rozhoduje pověřenec pro ochranu dat.",
         infoBox: {
           variant: "warnung",
-          title: "Pravidlo 72 hodin",
-          text: "Společnost má od zjištění porušení pouze 72 hodin na jeho oznámení PFPDT — ihned proto hlaste interně!",
+          title: "Povinnost hlášení",
+          text: "Ihned interně nahlaste jakýkoli incident nebo podezření na incident v oblasti ochrany dat. Pověřenec pro ochranu dat posoudí, zda je oznámení PFPDT nutné. Pokud je oznámení nezbytné, musí být provedeno co nejdříve.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Počkat, zda si toho někdo jiný všimne", "Opravit to sami, aniž byste kohokoli informovali", "Ihned informovat nadřízeného nebo pověřence pro ochranu dat", "Rozeslat e-mail všem zaměstnancům"],
         correctIndexes: [2],
-        explanation: "Okamžité interní hlášení je zásadní. Společnost má na oznámení PFPDT pouze 72 hodin. Opravit to sami mlčky není možností — situaci zhoršuje.",
+        explanation: "Okamžité interní hlášení je zásadní. Švýcarský DSG nestanoví pevnou lhůtu 72 hodin — to je pravidlo evropského GDPR. Porušení s vysokým rizikem musí být oznámena PFPDT co nejdříve. Opravit to sami mlčky není možností.",
       },
       {
         question: "Co znamená «záměrná ochrana dat»?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "Jak nahlásit incident?",
-        text: "Incidenty v oblasti ochrany dat nebo podezření na ně nahlaste ihned interně pověřenci nebo svému nadřízenému. Čím dříve se nahlásí, tím lépe může společnost reagovat — má pouze 72 hodin na externí oznámení PFPDT.",
+        text: "Incidenty v oblasti ochrany dat nebo podezření na ně nahlaste ihned interně pověřenci nebo svému nadřízenému. Čím dříve se nahlásí, tím lépe může společnost reagovat. Pověřenec pro ochranu dat posoudí, zda a kdy je nutné externí oznámení PFPDT.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + zamčená obrazovka jsou absolutním základem při práci z domova. Soukromé USB disky a odemčená zařízení jsou zjevná bezpečnostní porušení.",
       },
       {
-        question: "V jaké lhůtě musí společnost nahlásit porušení ochrany dat PFPDT?",
+        question: "Co vyžaduje švýcarský DSG při oznamování porušení ochrany dat PFPDT?",
         type: "single",
-        options: ["7 dní", "72 hodin", "30 dní"],
-        correctIndexes: [1],
-        explanation: "Lhůta 72 hodin platí analogicky s evropským GDPR. Proto musí být ihned provedeno interní hlášení.",
+        options: ["Pevnou lhůtu 72 hodin, jako v evropském GDPR", "Porušení ochrany dat není nikdy třeba oznamovat externě", "Oznámení musí být provedeno co nejdříve, pokud existuje vysoké riziko"],
+        correctIndexes: [2],
+        explanation: "Švýcarský DSG NESTANOVÍ pevnou lhůtu 72 hodin — to je pravidlo evropského GDPR. Porušení, která pravděpodobně představují vysoké riziko pro osobnost nebo základní práva, musí být oznámena PFPDT co nejdříve.",
       },
       {
         question: "Co dělat při podezření na phishing?",

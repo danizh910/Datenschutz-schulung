@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Obblighi di notifica in caso di violazione",
-        text: "Internamente — gli incidenti o i sospetti di incidente devono essere segnalati immediatamente al responsabile della protezione dei dati o al superiore gerarchico. Esternamente — la notifica all'autorità di vigilanza (IFPDT) e agli interessati è curata dal responsabile, se necessario, e sempre con tempestività.",
+        text: "Internamente — gli incidenti o i sospetti di incidente devono essere segnalati immediatamente al responsabile della protezione dei dati o al superiore gerarchico. Esternamente — se e quando notificare all'autorità di vigilanza (IFPDT) o agli interessati lo decide il responsabile della protezione dei dati.",
         infoBox: {
           variant: "warnung",
-          title: "Regola delle 72 ore",
-          text: "L'azienda dispone di sole 72 ore dalla scoperta di una violazione per notificarla all'IFPDT — segnali quindi immediatamente all'interno!",
+          title: "Obbligo di notifica",
+          text: "Segnali immediatamente all'interno qualsiasi incidente o sospetto relativo alla protezione dei dati. Il responsabile valuta se è necessaria una notifica all'IFPDT. Se la notifica è necessaria, deve avvenire il prima possibile.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Attendere per vedere se qualcun altro se ne accorge", "Correggere da soli senza informare nessuno", "Informare immediatamente il superiore gerarchico o il responsabile della protezione dei dati", "Inviare un'e-mail a tutti i collaboratori"],
         correctIndexes: [2],
-        explanation: "La segnalazione interna tempestiva è fondamentale. L'azienda dispone di sole 72 ore per la notifica all'IFPDT. Correggere da soli tacendo non è un'opzione — aggrava le cose.",
+        explanation: "La segnalazione interna tempestiva è fondamentale. La LPD svizzera non prevede un termine fisso di 72 ore — questa è una regola del GDPR europeo. Le violazioni con rischio elevato devono essere notificate all'IFPDT il prima possibile. Correggere da soli tacendo non è un'opzione.",
       },
       {
         question: "Cosa significa «protezione dei dati fin dalla progettazione»?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "Come segnalare un incidente?",
-        text: "Segnali immediatamente all'interno gli incidenti relativi alla protezione dei dati o i sospetti di incidente al responsabile o al Suo superiore gerarchico. Prima avviene la segnalazione, meglio l'azienda può reagire — dispone di sole 72 ore per la notifica esterna all'IFPDT.",
+        text: "Segnali immediatamente all'interno gli incidenti relativi alla protezione dei dati o i sospetti di incidente al responsabile o al Suo superiore gerarchico. Prima avviene la segnalazione, meglio l'azienda può reagire. Il responsabile della protezione dei dati valuta se e quando è necessaria una notifica all'IFPDT.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + schermo bloccato sono la base assoluta nel lavoro da remoto. Le chiavette USB private e i dispositivi sbloccati sono violazioni della sicurezza manifeste.",
       },
       {
-        question: "Entro quale termine l'azienda deve notificare una violazione dei dati all'IFPDT?",
+        question: "Cosa prevede la LPD svizzera per la notifica di una violazione dei dati all'IFPDT?",
         type: "single",
-        options: ["7 giorni", "72 ore", "30 giorni"],
-        correctIndexes: [1],
-        explanation: "Il termine di 72 ore si applica per analogia con il GDPR europeo. Ecco perché la segnalazione interna deve avvenire immediatamente.",
+        options: ["Un termine fisso di 72 ore, come nel GDPR europeo", "Le violazioni dei dati non devono mai essere segnalate esternamente", "La notifica deve avvenire il prima possibile se esiste un rischio elevato"],
+        correctIndexes: [2],
+        explanation: "La LPD svizzera NON prevede un termine fisso di 72 ore — questa è una regola del GDPR europeo. Le violazioni che probabilmente comportano un rischio elevato per la personalità o i diritti fondamentali devono essere notificate all'IFPDT il prima possibile.",
       },
       {
         question: "Cosa deve fare in caso di sospetto phishing?",

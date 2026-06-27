@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Obrigações de notificação em caso de violação",
-        text: "Internamente — os incidentes ou suspeitas de incidente devem ser notificados de imediato ao responsável pela proteção de dados ou ao superior hierárquico. Externamente — a notificação à autoridade de supervisão (PFPDT) e aos titulares é assegurada pelo responsável, se necessário, e sempre com prontidão.",
+        text: "Internamente — os incidentes ou suspeitas de incidente devem ser notificados de imediato ao responsável pela proteção de dados ou ao superior hierárquico. Externamente — se e quando notificar à autoridade de supervisão (PFPDT) ou aos titulares é avaliado e decidido pelo responsável pela proteção de dados.",
         infoBox: {
           variant: "warnung",
-          title: "Regra das 72 horas",
-          text: "A empresa dispõe de apenas 72 horas após a deteção de uma violação para a notificar ao PFPDT — notifique de imediato internamente!",
+          title: "Obrigação de notificação",
+          text: "Notifique de imediato internamente qualquer incidente ou suspeita de incidente relativo à proteção de dados. O responsável avalia se é necessária uma notificação ao PFPDT. Se a notificação for necessária, deve ser efetuada o mais rapidamente possível.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Aguardar para ver se alguém mais o deteta", "Corrigir sozinho sem informar ninguém", "Informar de imediato o superior hierárquico ou o responsável pela proteção de dados", "Enviar um e-mail a todos os colaboradores"],
         correctIndexes: [2],
-        explanation: "A notificação interna imediata é crucial. A empresa dispõe de apenas 72 horas para a notificação ao PFPDT. Corrigir sozinho e guardar silêncio não é uma opção — agrava as coisas.",
+        explanation: "A notificação interna imediata é crucial. O DSG suíço não estabelece um prazo fixo de 72 horas — essa é uma regra do RGPD europeu. As violações com alto risco devem ser notificadas ao PFPDT o mais rapidamente possível. Corrigir sozinho e guardar silêncio não é uma opção.",
       },
       {
         question: "O que significa «privacidade por conceção»?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "Como notificar um incidente?",
-        text: "Notifique de imediato os incidentes de proteção de dados ou suspeitas de incidente internamente ao responsável ou ao seu superior hierárquico. Quanto mais rápida for a notificação, melhor a empresa pode reagir — dispõe de apenas 72 horas para a notificação externa ao PFPDT.",
+        text: "Notifique de imediato os incidentes de proteção de dados ou suspeitas de incidente internamente ao responsável ou ao seu superior hierárquico. Quanto mais rápida for a notificação, melhor a empresa pode reagir. O responsável pela proteção de dados avalia se e quando é necessária uma notificação ao PFPDT.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + ecrã bloqueado são a base absoluta no teletrabalho. As pen drives privadas e os dispositivos desbloqueados são infrações de segurança manifestas.",
       },
       {
-        question: "Em que prazo deve a empresa notificar uma violação de dados ao PFPDT?",
+        question: "O que exige o DSG suíço para a notificação de uma violação de dados ao PFPDT?",
         type: "single",
-        options: ["7 dias", "72 horas", "30 dias"],
-        correctIndexes: [1],
-        explanation: "O prazo de 72 horas aplica-se por analogia com o RGPD europeu. Por isso, a notificação interna deve ser efetuada de imediato.",
+        options: ["Um prazo fixo de 72 horas, como no RGPD europeu", "As violações de dados nunca precisam de ser notificadas externamente", "A notificação deve ser efetuada o mais rapidamente possível se existir um risco elevado"],
+        correctIndexes: [2],
+        explanation: "O DSG suíço NÃO estabelece um prazo fixo de 72 horas — essa é uma regra do RGPD europeu. As violações suscetíveis de apresentar um risco elevado para a personalidade ou os direitos fundamentais devem ser notificadas ao PFPDT o mais rapidamente possível.",
       },
       {
         question: "O que deve fazer perante uma suspeita de phishing?",

@@ -37,6 +37,7 @@ export const pl = {
     currentLabel: 'Bieżący',
     loadingText: 'Ładowanie postępu…',
     videoLabel: 'Film wprowadzający · Szkolenie z ochrony danych',
+    progressLabel: (done: number, total: number) => `${done} / ${total} modułów ukończonych`,
   },
   modul: {
     backLabel: 'Wstecz',

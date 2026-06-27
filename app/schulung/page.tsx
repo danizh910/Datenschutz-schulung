@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Flame, Zap, Lock, Check, Star } from 'lucide-react';
+import { Zap, Lock, Check, Star } from 'lucide-react';
 import { getModules } from '@/data/modules';
 import type { Module } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
@@ -177,7 +177,6 @@ export default function SchulungPage() {
   const [userName, setUserName] = useState('');
   const [progressData, setProgressData] = useState<ProgressEntry[]>([]);
   const [loading, setLoading] = useState(true);
-  const [streak] = useState(3);
   const router = useRouter();
   const isDesktop = useIsDesktop();
   const t = useTranslation();
@@ -188,7 +187,7 @@ export default function SchulungPage() {
     const uid = localStorage.getItem('userId');
     const uname = localStorage.getItem('userName');
     if (!uid) { router.replace('/'); return; }
-    setUserName(uname || '');
+    setUserName(uname || ''); // eslint-disable-line react-hooks/set-state-in-effect
 
     fetch(`/api/progress?userId=${uid}`)
       .then((r) => r.json())
@@ -263,10 +262,6 @@ export default function SchulungPage() {
             </h1>
           </div>
           <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'var(--streak-soft)', padding: '8px 12px', borderRadius: 14, boxShadow: 'var(--clay-sm)', border: '1px solid var(--border-soft)' }}>
-              <Flame size={17} color="var(--streak)" fill="var(--streak)"/>
-              <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--streak)' }}>{streak}</span>
-            </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'var(--xp-soft)', padding: '8px 12px', borderRadius: 14, boxShadow: 'var(--clay-sm)', border: '1px solid var(--border-soft)' }}>
               <Zap size={17} color="var(--xp)" fill="var(--xp)"/>
               <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--xp)' }}>{totalScore}</span>
@@ -278,7 +273,7 @@ export default function SchulungPage() {
         <div style={{ marginTop: 18, marginBottom: 22 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
             <span style={{ color: 'var(--text-muted)', fontSize: 13, fontWeight: 500 }}>
-              {completedCount} / {modules.length} Module abgeschlossen
+              {t.schulung.progressLabel(completedCount, modules.length)}
             </span>
             <span style={{ color: barColor, fontSize: 13, fontWeight: 700, transition: 'color 0.4s ease' }}>
               {progressPct}%

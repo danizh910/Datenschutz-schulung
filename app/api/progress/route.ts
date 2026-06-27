@@ -3,12 +3,15 @@ import { getDb } from '@/lib/db';
 import { progress } from '@/lib/schema';
 import { eq, and } from 'drizzle-orm';
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const VALID_MODULE_IDS = new Set([1, 2, 3, 4, 5, 6, 7]);
+
 export async function GET(req: NextRequest) {
   try {
     const userId = req.nextUrl.searchParams.get('userId');
 
-    if (!userId) {
-      return NextResponse.json({ error: 'userId fehlt.' }, { status: 400 });
+    if (!userId || !UUID_RE.test(userId)) {
+      return NextResponse.json({ error: 'userId fehlt oder ungültig.' }, { status: 400 });
     }
 
     const db = getDb();
@@ -28,8 +31,14 @@ export async function POST(req: NextRequest) {
   try {
     const { userId, moduleId, score } = await req.json();
 
-    if (!userId || moduleId === undefined || score === undefined) {
-      return NextResponse.json({ error: 'Fehlende Parameter.' }, { status: 400 });
+    if (!userId || !UUID_RE.test(userId)) {
+      return NextResponse.json({ error: 'userId fehlt oder ungültig.' }, { status: 400 });
+    }
+    if (!VALID_MODULE_IDS.has(Number(moduleId))) {
+      return NextResponse.json({ error: 'moduleId ungültig.' }, { status: 400 });
+    }
+    if (typeof score !== 'number' || score < 0 || score > 100 || !Number.isInteger(score)) {
+      return NextResponse.json({ error: 'score muss eine ganze Zahl zwischen 0 und 100 sein.' }, { status: 400 });
     }
 
     const db = getDb();

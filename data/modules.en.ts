@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: 'Reporting obligations for data breaches',
-        text: 'Internally — incidents or suspected incidents must be reported immediately to the Data Protection Officer or line manager. Externally — notification to the supervisory authority (FDPIC) and to data subjects is handled by the Data Protection Officer, where necessary, and always promptly.',
+        text: 'Internally — incidents or suspected incidents must be reported immediately to the Data Protection Officer or line manager. Externally — whether and when a notification to the supervisory authority (FDPIC) or to data subjects is required is assessed and decided by the Data Protection Officer.',
         infoBox: {
           variant: 'warnung',
-          title: '72-hour rule',
-          text: 'The company has only 72 hours after discovering a data breach to report it to the FDPIC — so report internally immediately!',
+          title: 'Reporting obligation',
+          text: 'Report any data protection incident or suspected incident internally right away. Whether a report to the FDPIC is required will be assessed by the Data Protection Officer. If a report is necessary, it must be made as soon as possible.',
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: 'single',
         options: ['Wait and see if someone else notices', 'Fix it yourself without telling anyone', 'Immediately inform your line manager or the Data Protection Officer', 'Send an email to all employees'],
         correctIndexes: [2],
-        explanation: 'Prompt internal reporting is crucial. The company has only 72 hours for the FDPIC notification. Fixing it yourself and staying silent is not an option — it makes things worse.',
+        explanation: 'Prompt internal reporting is crucial. The Swiss FADP sets no fixed 72-hour deadline — unlike the EU GDPR. Breaches likely to pose a high risk must be reported to the FDPIC as soon as possible. Fixing it yourself and staying silent is not an option.',
       },
       {
         question: "What does 'Privacy by Design' mean?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: 'How do I report an incident?',
-        text: 'Report data protection incidents or suspected incidents immediately, internally, to the Data Protection Officer or your line manager. The faster the report, the better the response — the company has only 72 hours for the external notification to the FDPIC.',
+        text: 'Report data protection incidents or suspected incidents immediately, internally, to the Data Protection Officer or your line manager. The faster the report, the better the response. The Data Protection Officer will assess whether and when a notification to the FDPIC is required.',
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: 'VPN + locked screen are the absolute basics when working from home. Private USB sticks and unlocked devices are clear security violations.',
       },
       {
-        question: 'Within what timeframe must the company report a data breach to the FDPIC?',
+        question: 'What does the Swiss FADP require when reporting a data breach to the FDPIC?',
         type: 'single',
-        options: ['7 days', '72 hours', '30 days'],
-        correctIndexes: [1],
-        explanation: 'The 72-hour deadline applies in line with the EU GDPR. This is why internal reporting must happen immediately so the company can respond.',
+        options: ['A fixed 72-hour deadline, as in the EU GDPR', 'Data breaches never need to be reported externally', 'The report must be made as soon as possible if there is a high risk'],
+        correctIndexes: [2],
+        explanation: 'The Swiss FADP sets NO fixed 72-hour deadline — that is an EU GDPR rule. Breaches likely to pose a high risk to the personality or fundamental rights of data subjects must be reported to the FDPIC as soon as possible.',
       },
       {
         question: 'What should you do if you suspect phishing?',

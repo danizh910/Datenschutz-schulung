@@ -17,6 +17,7 @@ export default function HandoutPage() {
       locale === 'en' ? 'en-GB'
       : locale === 'fr' ? 'fr-CH'
       : 'de-CH';
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setToday(new Date().toLocaleDateString(dateLocale, {
       day: '2-digit', month: 'long', year: 'numeric',
     }));
@@ -197,7 +198,7 @@ export default function HandoutPage() {
             {[
               { label: 'Datenschutzbeauftragter', value: 'Myrio Kluser · myrio.kluser@qmart.ch' },
               { label: 'Meldepflicht intern', value: 'Sofort an DSB oder vorgesetzte Person' },
-              { label: 'Frist für EDÖB-Meldung', value: '72 Stunden nach Entdeckung' },
+              { label: 'EDÖB-Meldung', value: 'So rasch als möglich (kein fixer Termin im DSG)' },
               { label: 'DSG in Kraft seit', value: '1. September 2023' },
               { label: 'Grundprinzipien', value: 'Verhältnismässigkeit, Zweckbindung, Transparenz' },
               { label: 'Zertifizierung', value: 'GoodPrivacy (SQS)' },

@@ -36,6 +36,7 @@ export const cs = {
     currentLabel: 'Aktuální',
     loadingText: 'Načítání pokroku…',
     videoLabel: 'Úvodní video · Školení o ochraně dat',
+    progressLabel: (done: number, total: number) => `${done} / ${total} modulů dokončeno`,
   },
   modul: {
     backLabel: 'Zpět',

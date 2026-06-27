@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Obveze obavješćivanja u slučaju povrede",
-        text: "Interno — incidenti ili sumnje na incidente moraju se odmah prijaviti službeniku za zaštitu podataka ili neposrednom nadređenom. Eksterno — obavješćivanje nadzornog tijela (PFPDT) i pogođenih osoba provodi službenik, po potrebi, i uvijek bez odgode.",
+        text: "Interno — incidenti ili sumnje na incidente moraju se odmah prijaviti službeniku za zaštitu podataka ili neposrednom nadređenom. Eksterno — je li i kada potrebno obavijestiti nadzorno tijelo (PFPDT) ili pogođene osobe procjenjuje i odlučuje službenik za zaštitu podataka.",
         infoBox: {
           variant: "warnung",
-          title: "Pravilo 72 sata",
-          text: "Tvrtka ima samo 72 sata od otkrivanja povrede da je prijavi PFPDT-u — odmah stoga prijavite interno!",
+          title: "Obveza obavješćivanja",
+          text: "Odmah interno prijavite svaki incident ili sumnju na incident vezan uz zaštitu podataka. Službenik za zaštitu podataka procjenjuje je li potrebna prijava PFPDT-u. Ako je prijava potrebna, mora se obaviti što je brže moguće.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Pričekati da li će netko drugi primijetiti", "Ispraviti sami bez obavješćivanja ikoga", "Odmah obavijestiti neposrednog nadređenog ili službenika za zaštitu podataka", "Poslati e-mail svim zaposlenicima"],
         correctIndexes: [2],
-        explanation: "Hitna interna prijava je ključna. Tvrtka ima samo 72 sata za prijavu PFPDT-u. Ispraviti sami i šutjeti nije opcija — pogoršava situaciju.",
+        explanation: "Hitna interna prijava je ključna. Švicarski DSG ne predviđa fiksni rok od 72 sata — to je pravilo europskog GDPR-a. Povrede s visokim rizikom moraju se prijaviti PFPDT-u što je brže moguće. Ispraviti sami i šutjeti nije opcija.",
       },
       {
         question: "Što znači «zaštita podataka po dizajnu»?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "Kako prijaviti incident?",
-        text: "Incidente vezane uz zaštitu podataka ili sumnje na incidente odmah prijavite interno službeniku ili Vašem neposrednom nadređenom. Što brže se prijavi, bolje može reagirati tvrtka — ima samo 72 sata za vanjsku prijavu PFPDT-u.",
+        text: "Incidente vezane uz zaštitu podataka ili sumnje na incidente odmah prijavite interno službeniku ili Vašem neposrednom nadređenom. Što brže se prijavi, bolje može reagirati tvrtka. Službenik za zaštitu podataka procjenjuje je li i kada potrebna vanjska prijava PFPDT-u.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + zaključan zaslon apsolutna su osnova pri radu od kuće. Privatni USB diskovi i otključani uređaji su očite sigurnosne povrede.",
       },
       {
-        question: "U kojoj lhůtě tvrtka mora prijaviti povredu zaštite podataka PFPDT-u?",
+        question: "Što zahtijeva švicarski DSG za prijavu povrede zaštite podataka PFPDT-u?",
         type: "single",
-        options: ["7 dana", "72 sata", "30 dana"],
-        correctIndexes: [1],
-        explanation: "Rok od 72 sata primjenjuje se analogno s europskim GDPR-om. Zato internu prijavu treba obaviti odmah.",
+        options: ["Fiksni rok od 72 sata, kao u europskom GDPR-u", "Povrede zaštite podataka nikada ne treba prijavljivati izvana", "Prijava se mora obaviti što je brže moguće ako postoji visoki rizik"],
+        correctIndexes: [2],
+        explanation: "Švicarski DSG NE predviđa fiksni rok od 72 sata — to je pravilo europskog GDPR-a. Povrede koje vjerojatno predstavljaju visoki rizik za osobnost ili temeljna prava moraju se prijaviti PFPDT-u što je brže moguće.",
       },
       {
         question: "Što učiniti pri sumnji na phishing?",

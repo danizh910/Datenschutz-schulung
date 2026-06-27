@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: 'Meldepflichten bei Datenschutzverletzungen',
-        text: 'Intern – Vorfälle oder deren Verdacht sofort an den Datenschutzbeauftragten oder die vorgesetzte Person melden. Extern – die Meldung an die Aufsichtsbehörde (EDÖB) und an Betroffene erfolgt durch den Datenschutzbeauftragten, sofern nötig, und immer zeitnah.',
+        text: 'Intern – Vorfälle oder deren Verdacht sofort an den Datenschutzbeauftragten oder die vorgesetzte Person melden. Extern – ob und wann eine Meldung an die Aufsichtsbehörde (EDÖB) oder an Betroffene erfolgt, prüft und entscheidet der Datenschutzbeauftragte.',
         infoBox: {
           variant: 'warnung',
-          title: '72-Stunden-Regel',
-          text: 'Das Unternehmen hat nach Entdeckung einer Datenpanne nur 72 Stunden für die Meldung an den EDÖB – deshalb sofort intern melden!',
+          title: 'Meldepflicht',
+          text: 'Melde einen Datenschutzvorfall oder bereits einen Verdacht sofort intern. Ob eine Meldung an den EDÖB nötig ist, wird durch den Datenschutzbeauftragten geprüft. Falls eine Meldung erforderlich ist, muss sie so rasch als möglich erfolgen.',
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: 'single',
         options: ['Abwarten und schauen ob jemand anderes es bemerkt', 'Die Panne selbst beheben und niemandem sagen', 'Sofort die vorgesetzte Person oder den Datenschutzbeauftragten informieren', 'Eine E-Mail an alle Mitarbeitenden schicken'],
         correctIndexes: [2],
-        explanation: 'Schnelles internes Melden ist entscheidend. Das Unternehmen hat nur 72 Stunden für die EDÖB-Meldung. Selbst "reparieren" und schweigen ist keine Option – das macht es schlimmer.',
+        explanation: 'Schnelles internes Melden ist entscheidend. Unter dem Schweizer DSG gibt es keine starre 72-Stunden-Frist wie in der EU-DSGVO – Datenpannen mit hohem Risiko müssen dem EDÖB so rasch als möglich gemeldet werden. Selbst "reparieren" und schweigen ist keine Option.',
       },
       {
         question: "Was bedeutet 'Privacy by Design'?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: 'Wie melde ich einen Vorfall?',
-        text: 'Datenschutzvorfälle oder deren Verdacht meldest du sofort intern an den Datenschutzbeauftragten oder deine vorgesetzte Person. Je schneller die Meldung, desto besser kann reagiert werden – das Unternehmen hat nur 72 Stunden für die externe Meldung an den EDÖB.',
+        text: 'Datenschutzvorfälle oder deren Verdacht meldest du sofort intern an den Datenschutzbeauftragten oder deine vorgesetzte Person. Je schneller die Meldung, desto besser kann reagiert werden. Der Datenschutzbeauftragte prüft, ob und wann eine Meldung an den EDÖB erforderlich ist.',
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: 'VPN + gesperrter Bildschirm sind absolute Basis im Homeoffice. Private USB-Sticks und ungesperrte Geräte sind klare Sicherheitsverstösse.',
       },
       {
-        question: 'Innerhalb welcher Frist muss das Unternehmen eine Datenpanne dem EDÖB melden?',
+        question: 'Was gilt laut Schweizer DSG für die Meldung einer Datenpanne an den EDÖB?',
         type: 'single',
-        options: ['7 Tage', '72 Stunden', '30 Tage'],
-        correctIndexes: [1],
-        explanation: 'Die 72-Stunden-Frist gilt analog zur EU-DSGVO. Deshalb muss intern sofort gemeldet werden, damit das Unternehmen reagieren kann.',
+        options: ['Eine starre Frist von 72 Stunden, wie in der EU-DSGVO', 'Datenpannen müssen nie extern gemeldet werden', 'Die Meldung muss so rasch als möglich erfolgen, wenn ein hohes Risiko besteht'],
+        correctIndexes: [2],
+        explanation: 'Das Schweizer DSG schreibt KEINE starre 72-Stunden-Frist vor – das ist eine Regel der EU-DSGVO. Verletzungen, die voraussichtlich zu einem hohen Risiko für Persönlichkeit oder Grundrechte führen, sind dem EDÖB so rasch als möglich zu melden.',
       },
       {
         question: 'Was solltest du bei einem Phishing-Verdacht tun?',

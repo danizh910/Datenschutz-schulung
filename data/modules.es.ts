@@ -173,11 +173,11 @@ export const modules: Module[] = [
       },
       {
         heading: "Obligaciones de notificación en caso de infracción",
-        text: "Internamente — los incidentes o sospechas de incidente deben notificarse de inmediato al delegado de protección de datos o al superior jerárquico. Externamente — la notificación a la autoridad supervisora (PFPDT) y a los afectados es gestionada por el delegado, si es necesario, y siempre con rapidez.",
+        text: "Internamente — los incidentes o sospechas de incidente deben notificarse de inmediato al delegado de protección de datos o al superior jerárquico. Externamente — si y cuándo se notifica a la autoridad supervisora (PFPDT) o a los afectados lo decide el delegado de protección de datos.",
         infoBox: {
           variant: "warnung",
-          title: "Regla de las 72 horas",
-          text: "La empresa dispone de solo 72 horas desde la detección de una infracción para notificarla al PFPDT — ¡notifique de inmediato internamente!",
+          title: "Obligación de notificación",
+          text: "Notifique de inmediato internamente cualquier incidente o sospecha de incidente relativo a la protección de datos. El delegado evalúa si es necesaria una notificación al PFPDT. Si la notificación es necesaria, debe realizarse lo antes posible.",
         },
       },
     ],
@@ -187,7 +187,7 @@ export const modules: Module[] = [
         type: "single",
         options: ["Esperar a ver si alguien más lo detecta", "Corregirlo uno mismo sin informar a nadie", "Informar de inmediato al superior jerárquico o al delegado de protección de datos", "Enviar un correo electrónico a todos los empleados"],
         correctIndexes: [2],
-        explanation: "La notificación interna inmediata es crucial. La empresa dispone de solo 72 horas para la notificación al PFPDT. Corregirlo uno mismo y guardar silencio no es una opción — empeora las cosas.",
+        explanation: "La notificación interna inmediata es crucial. El DSG suizo no establece un plazo fijo de 72 horas — esa es una regla del RGPD europeo. Las infracciones con alto riesgo deben notificarse al PFPDT lo antes posible. Corregirlo uno mismo y guardar silencio no es una opción.",
       },
       {
         question: "¿Qué significa la «privacidad desde el diseño»?",
@@ -295,7 +295,7 @@ export const modules: Module[] = [
       },
       {
         heading: "¿Cómo notificar un incidente?",
-        text: "Notifique de inmediato los incidentes de protección de datos o las sospechas de incidente internamente al delegado o a su superior jerárquico. Cuanto más rápida sea la notificación, mejor podrá reaccionar la empresa — dispone de solo 72 horas para la notificación externa al PFPDT.",
+        text: "Notifique de inmediato los incidentes de protección de datos o las sospechas de incidente internamente al delegado o a su superior jerárquico. Cuanto más rápida sea la notificación, mejor podrá reaccionar la empresa. El delegado de protección de datos evalúa si y cuándo es necesaria una notificación al PFPDT.",
       },
     ],
     quiz: [
@@ -344,11 +344,11 @@ export const modules: Module[] = [
         explanation: "VPN + pantalla bloqueada son la base absoluta en teletrabajo. Las memorias USB privadas y los dispositivos desbloqueados son infracciones de seguridad manifiestas.",
       },
       {
-        question: "¿En qué plazo debe la empresa notificar una infracción de datos al PFPDT?",
+        question: "¿Qué exige el DSG suizo para notificar una infracción de datos al PFPDT?",
         type: "single",
-        options: ["7 días", "72 horas", "30 días"],
-        correctIndexes: [1],
-        explanation: "El plazo de 72 horas se aplica por analogía con el RGPD europeo. Por eso debe realizarse de inmediato una notificación interna.",
+        options: ["Un plazo fijo de 72 horas, como en el RGPD europeo", "Las infracciones de datos nunca necesitan notificarse externamente", "La notificación debe realizarse lo antes posible si existe un alto riesgo"],
+        correctIndexes: [2],
+        explanation: "El DSG suizo NO establece un plazo fijo de 72 horas — esa es una regla del RGPD europeo. Las infracciones que probablemente conlleven un alto riesgo para la personalidad o los derechos fundamentales deben notificarse al PFPDT lo antes posible.",
       },
       {
         question: "¿Qué debe hacer ante una sospecha de phishing?",
