@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: 'warnung',
           title: 'Warning',
-          text: 'Even unintentional violations can result in fines of up to CHF 250,000 — ignorance is no excuse.',
+          text: 'Intentional violations by natural persons can result in fines of up to CHF 250,000 (Art. 60–63 FADP). Ignorance is no excuse.',
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: 'Rectification — data subjects may request the correction of inaccurate data. Erasure — they may request deletion if the data is no longer necessary or was processed unlawfully.',
       },
       {
-        heading: 'Right to restriction of processing',
-        text: 'Data subjects may request that their data be processed in a restricted manner — for example, if they contest its accuracy.',
+        heading: 'Right to blocking of data',
+        text: 'Data subjects may request that their data be blocked — for example if they contest its accuracy or if processing is not lawful (derived from personality rights, Art. 32 FADP).',
       },
       {
-        heading: 'Right to object and data portability',
-        text: 'Right to object — data subjects may object to processing based on their particular situation. Data portability — they may request that their data be transferred in a structured, commonly used, and machine-readable format.',
+        heading: 'Data disclosure (Art. 28 FADP)',
+        text: 'Data subjects may request that their data be handed over in a common electronic format — provided the data is processed automatically and the purpose allows it.',
         infoBox: {
           variant: 'merksatz',
-          title: 'The six rights',
-          text: 'Access, rectification, erasure, restriction, objection, and data portability.',
+          title: 'Core rights under Swiss FADP',
+          text: 'Right of access (Art. 25), rectification/erasure/blocking (Art. 32), and data disclosure (Art. 28). The Swiss FADP does not have an explicit right to object as under the EU GDPR.',
         },
       },
     ],
     quiz: [
       {
-        question: 'What rights do data subjects have regarding their data?',
+        question: 'What rights does the Swiss FADP provide for data subjects?',
         type: 'single',
-        options: ['Only the right of access', 'Access, rectification, erasure, restriction, objection, and data portability', 'No special rights'],
+        options: ['Only the right of access', 'Access, rectification/erasure/blocking, and data disclosure', 'Access, rectification, erasure, restriction, objection and data portability (as in the EU GDPR)'],
         correctIndexes: [1],
-        explanation: 'The FADP grants data subjects all six of the listed rights.',
+        explanation: 'The Swiss FADP provides the right of access (Art. 25), rectification/erasure/blocking (Art. 32), and data disclosure (Art. 28). The Swiss FADP does not have an explicit right to object or restriction as in the EU GDPR.',
       },
       {
         question: 'Within what timeframe must access be provided?',

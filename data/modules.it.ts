@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Attenzione",
-          text: "Anche le violazioni non intenzionali possono comportare sanzioni fino a CHF 250.000 — l'ignoranza non protegge dalle conseguenze.",
+          text: "Le violazioni intenzionali da parte di persone fisiche possono comportare sanzioni fino a CHF 250.000 (art. 60–63 LPD). L'ignoranza non protegge dalle conseguenze.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Rettifica — gli interessati possono richiedere la correzione di dati inesatti. Cancellazione — possono richiedere la cancellazione se i dati non sono più necessari o sono stati trattati illecitamente.",
       },
       {
-        heading: "Diritto di limitazione del trattamento",
-        text: "Gli interessati possono richiedere che i loro dati siano trattati solo in modo limitato — ad esempio se ne contestano l'esattezza.",
+        heading: "Diritto al blocco dei dati",
+        text: "Gli interessati possono richiedere il blocco dei propri dati — ad esempio se ne contestano l'esattezza o se il trattamento non è lecito (derivato dalla protezione della personalità, art. 32 LPD).",
       },
       {
-        heading: "Diritto di opposizione e portabilità dei dati",
-        text: "Opposizione — gli interessati possono opporsi al trattamento per ragioni attinenti alla loro situazione particolare. Portabilità — possono richiedere che i loro dati siano trasmessi in un formato strutturato, di uso comune e leggibile da dispositivo automatico.",
+        heading: "Consegna dei dati (art. 28 LPD)",
+        text: "Gli interessati possono richiedere la consegna dei propri dati in un formato elettronico comune — a condizione che i dati siano trattati automaticamente e che lo scopo lo consenta.",
         infoBox: {
           variant: "merksatz",
-          title: "I sei diritti",
-          text: "Accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei dati.",
+          title: "Diritti fondamentali secondo la LPD svizzera",
+          text: "Diritto di accesso (art. 25), rettifica/cancellazione/blocco (art. 32) e consegna dei dati (art. 28). La LPD svizzera non prevede un diritto di opposizione esplicito come il RGPD dell'UE.",
         },
       },
     ],
     quiz: [
       {
-        question: "Quali diritti hanno gli interessati sui propri dati?",
+        question: "Quali diritti prevede la LPD svizzera per gli interessati?",
         type: "single",
-        options: ["Solo il diritto di accesso", "Accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei dati", "Nessun diritto particolare"],
+        options: ["Solo il diritto di accesso", "Accesso, rettifica/cancellazione/blocco e consegna dei dati", "Accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei dati (come il RGPD dell'UE)"],
         correctIndexes: [1],
-        explanation: "La LPD riconosce agli interessati tutti e sei i diritti menzionati.",
+        explanation: "La LPD svizzera prevede il diritto di accesso (art. 25), rettifica/cancellazione/blocco (art. 32) e consegna dei dati (art. 28). La LPD svizzera non prevede un diritto di opposizione o limitazione esplicito come il RGPD dell'UE.",
       },
       {
         question: "Entro quale termine deve essere concesso l'accesso?",

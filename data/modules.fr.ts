@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Attention",
-          text: "Même les violations involontaires peuvent entraîner des amendes allant jusqu'à CHF 250 000 — l'ignorance ne protège pas contre les sanctions.",
+          text: "Les violations intentionnelles par des personnes physiques peuvent entraîner des amendes jusqu'à CHF 250 000 (art. 60–63 LPD). L'ignorance ne protège pas contre les sanctions.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Rectification — les personnes concernées peuvent demander la correction de données inexactes. Effacement — elles peuvent demander la suppression si les données ne sont plus nécessaires ou ont été traitées illicitement.",
       },
       {
-        heading: "Droit à la limitation du traitement",
-        text: "Les personnes concernées peuvent demander que leurs données ne soient traitées que de manière limitée — par exemple si elles contestent leur exactitude.",
+        heading: "Droit au blocage des données",
+        text: "Les personnes concernées peuvent demander le blocage de leurs données — par exemple si elles contestent leur exactitude ou si le traitement n'est pas licite (issu de la protection de la personnalité, art. 32 LPD).",
       },
       {
-        heading: "Droit d'opposition et portabilité des données",
-        text: "Opposition — les personnes concernées peuvent s'opposer au traitement pour des raisons tenant à leur situation particulière. Portabilité — elles peuvent demander que leurs données soient transmises dans un format structuré, couramment utilisé et lisible par machine.",
+        heading: "Remise des données (art. 28 LPD)",
+        text: "Les personnes concernées peuvent demander la remise de leurs données dans un format électronique courant — à condition que les données soient traitées automatiquement et que le but le permette.",
         infoBox: {
           variant: "merksatz",
-          title: "Les six droits",
-          text: "Accès, rectification, effacement, limitation, opposition et portabilité des données.",
+          title: "Droits essentiels selon la LPD suisse",
+          text: "Droit d'accès (art. 25), rectification/effacement/blocage (art. 32) et remise des données (art. 28). La LPD suisse ne connaît pas de droit d'opposition explicite comme le RGPD de l'UE.",
         },
       },
     ],
     quiz: [
       {
-        question: "Quels droits ont les personnes concernées sur leurs données ?",
+        question: "Quels droits la LPD suisse prévoit-elle pour les personnes concernées ?",
         type: "single",
-        options: ["Uniquement le droit d'accès", "Accès, rectification, effacement, limitation, opposition et portabilité des données", "Aucun droit particulier"],
+        options: ["Uniquement le droit d'accès", "Accès, rectification/effacement/blocage et remise des données", "Accès, rectification, effacement, limitation, opposition et portabilité des données (comme le RGPD de l'UE)"],
         correctIndexes: [1],
-        explanation: "La LPD accorde aux personnes concernées l'ensemble des six droits mentionnés.",
+        explanation: "La LPD suisse prévoit le droit d'accès (art. 25), la rectification/effacement/blocage (art. 32) et la remise des données (art. 28). La LPD suisse ne connaît pas de droit d'opposition ou de limitation explicite comme le RGPD de l'UE.",
       },
       {
         question: "Dans quel délai l'accès doit-il être accordé ?",

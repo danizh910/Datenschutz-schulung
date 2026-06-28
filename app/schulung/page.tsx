@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Zap, Lock, Check, Star } from 'lucide-react';
+import { Zap, Lock, Check, Star, Trash2 } from 'lucide-react';
 import { getModules } from '@/data/modules';
 import type { Module } from '@/data/modules';
 import ProgressBar from '@/components/ProgressBar';
@@ -196,6 +196,20 @@ export default function SchulungPage() {
       .finally(() => setLoading(false));
   }, [router]);
 
+  const handleDelete = async () => {
+    if (!window.confirm(t.schulung.deleteConfirm)) return;
+    const uid = localStorage.getItem('userId');
+    if (!uid) return;
+    try {
+      await fetch(`/api/delete?userId=${uid}`, { method: 'DELETE' });
+    } catch {
+      // best-effort
+    }
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    router.replace('/');
+  };
+
   const completedIds = new Set(progressData.filter((p) => p.completed).map((p) => p.moduleId));
   const completedCount = completedIds.size;
   const totalScore = progressData.reduce((sum, p) => sum + (p.score || 0), 0);
@@ -223,10 +237,9 @@ export default function SchulungPage() {
     );
   }
 
-  // Snake path uses fixed values independent of screen width.
-  // x is in 0-100 (= %) so it matches CSS left:X% directly — no measurement needed.
-  const WEAVE = 10; // gentle ±10% oscillation from center
-  const STEP_Y = 160; // px between module circle centers
+  // Snake path: x is 0-100 (%) matching CSS left:X%
+  const WEAVE = 10;
+  const STEP_Y = 160;
   const pathPositions = modules.map((_, i) => {
     const isLast = i === modules.length - 1;
     return {
@@ -269,7 +282,7 @@ export default function SchulungPage() {
           </div>
         </div>
 
-        {/* Progress bar — custom label + color-coded bar */}
+        {/* Progress bar */}
         <div style={{ marginTop: 18, marginBottom: 22 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
             <span style={{ color: 'var(--text-muted)', fontSize: 13, fontWeight: 500 }}>
@@ -357,7 +370,6 @@ export default function SchulungPage() {
       </div>
 
       {/* ─── Snake Path ─── */}
-      {/* Container: narrow, centered. x=0-100 in viewBox == left:0%-100% in CSS — same reference, no measurement. */}
       <div
         style={{ position: 'relative', maxWidth: 360, margin: '0 auto', padding: 0, height: pathHeight }}
       >
@@ -389,8 +401,9 @@ export default function SchulungPage() {
         ))}
       </div>
 
-      {/* ─── Handout download ─── */}
-      <div style={{ textAlign: 'center', marginTop: 28, paddingBottom: 4, padding: isDesktop ? '0 40px' : '0 20px' }}>
+      {/* ─── Bottom actions ─── */}
+      <div style={{ textAlign: 'center', marginTop: 28, padding: isDesktop ? '0 40px' : '0 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+        {/* Handout download */}
         <button
           onClick={() => window.open('/handout', '_blank')}
           style={{
@@ -406,6 +419,20 @@ export default function SchulungPage() {
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
           </svg>
           {t.abschluss.btnHandout}
+        </button>
+
+        {/* Data deletion */}
+        <button
+          onClick={handleDelete}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            background: 'transparent', color: 'var(--text-muted)',
+            border: '1px solid var(--border-soft)', borderRadius: 12,
+            padding: '8px 16px', fontSize: 12, fontWeight: 500, cursor: 'pointer',
+          }}
+        >
+          <Trash2 size={13} strokeWidth={2}/>
+          {t.schulung.deleteData}
         </button>
       </div>
 

@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Atención",
-          text: "Incluso las infracciones involuntarias pueden acarrear multas de hasta CHF 250.000 — el desconocimiento no exime de sanciones.",
+          text: "Las infracciones intencionales por parte de personas físicas pueden acarrear multas de hasta CHF 250.000 (art. 60–63 LPD). El desconocimiento no exime de sanciones.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Rectificación — las personas afectadas pueden solicitar la corrección de datos inexactos. Supresión — pueden solicitar la eliminación si los datos ya no son necesarios o han sido tratados ilícitamente.",
       },
       {
-        heading: "Derecho a la limitación del tratamiento",
-        text: "Las personas afectadas pueden solicitar que sus datos solo se traten de forma limitada — por ejemplo, si cuestionan su exactitud.",
+        heading: "Derecho al bloqueo de datos",
+        text: "Las personas afectadas pueden solicitar el bloqueo de sus datos — por ejemplo si cuestionan su exactitud o si el tratamiento no es lícito (derivado de los derechos de la personalidad, art. 32 LPD).",
       },
       {
-        heading: "Derecho de oposición y portabilidad de datos",
-        text: "Oposición — las personas afectadas pueden oponerse al tratamiento por razones relacionadas con su situación particular. Portabilidad — pueden solicitar que sus datos se transmitan en un formato estructurado, de uso común y legible por máquina.",
+        heading: "Entrega de datos (art. 28 LPD)",
+        text: "Las personas afectadas pueden solicitar la entrega de sus datos en un formato electrónico habitual — siempre que los datos se traten de forma automatizada y el fin lo permita.",
         infoBox: {
           variant: "merksatz",
-          title: "Los seis derechos",
-          text: "Acceso, rectificación, supresión, limitación, oposición y portabilidad de datos.",
+          title: "Derechos fundamentales según el DSG suizo",
+          text: "Derecho de acceso (art. 25), rectificación/supresión/bloqueo (art. 32) y entrega de datos (art. 28). El DSG suizo no contempla un derecho de oposición explícito como el RGPD de la UE.",
         },
       },
     ],
     quiz: [
       {
-        question: "¿Qué derechos tienen las personas afectadas sobre sus datos?",
+        question: "¿Qué derechos prevé el DSG suizo para las personas afectadas?",
         type: "single",
-        options: ["Únicamente el derecho de acceso", "Acceso, rectificación, supresión, limitación, oposición y portabilidad de datos", "Ningún derecho especial"],
+        options: ["Únicamente el derecho de acceso", "Acceso, rectificación/supresión/bloqueo y entrega de datos", "Acceso, rectificación, supresión, limitación, oposición y portabilidad de datos (como el RGPD de la UE)"],
         correctIndexes: [1],
-        explanation: "El DSG otorga a los afectados la totalidad de los seis derechos mencionados.",
+        explanation: "El DSG suizo prevé el derecho de acceso (art. 25), rectificación/supresión/bloqueo (art. 32) y entrega de datos (art. 28). El DSG suizo no contempla un derecho de oposición o limitación explícito como el RGPD de la UE.",
       },
       {
         question: "¿En qué plazo debe concederse el acceso?",

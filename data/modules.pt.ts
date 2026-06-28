@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Atenção",
-          text: "Mesmo as infrações involuntárias podem acarretar coimas de até CHF 250.000 — o desconhecimento não protege de sanções.",
+          text: "As infrações intencionais por pessoas singulares podem acarretar coimas de até CHF 250.000 (art. 60–63 LPD). O desconhecimento não protege de sanções.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Retificação — os titulares podem solicitar a correção de dados inexatos. Apagamento — podem solicitar a eliminação se os dados já não forem necessários ou tiverem sido tratados ilicitamente.",
       },
       {
-        heading: "Direito à limitação do tratamento",
-        text: "Os titulares podem solicitar que os seus dados sejam tratados apenas de forma limitada — por exemplo, se contestarem a sua exatidão.",
+        heading: "Direito ao bloqueio de dados",
+        text: "Os titulares podem solicitar o bloqueio dos seus dados — por exemplo se contestarem a sua exatidão ou se o tratamento não for lícito (derivado da proteção da personalidade, art. 32 LPD).",
       },
       {
-        heading: "Direito de oposição e portabilidade dos dados",
-        text: "Oposição — os titulares podem opor-se ao tratamento por razões relacionadas com a sua situação particular. Portabilidade — podem solicitar que os seus dados sejam transmitidos num formato estruturado, de uso corrente e de leitura automática.",
+        heading: "Entrega de dados (art. 28 LPD)",
+        text: "Os titulares podem solicitar a entrega dos seus dados num formato eletrónico habitual — desde que os dados sejam tratados automaticamente e o fim o permita.",
         infoBox: {
           variant: "merksatz",
-          title: "Os seis direitos",
-          text: "Acesso, retificação, apagamento, limitação, oposição e portabilidade dos dados.",
+          title: "Direitos essenciais segundo o DSG suíço",
+          text: "Direito de acesso (art. 25), retificação/apagamento/bloqueio (art. 32) e entrega de dados (art. 28). O DSG suíço não prevê um direito de oposição explícito como o RGPD da UE.",
         },
       },
     ],
     quiz: [
       {
-        question: "Que direitos têm os titulares sobre os seus dados?",
+        question: "Que direitos prevê o DSG suíço para os titulares dos dados?",
         type: "single",
-        options: ["Apenas o direito de acesso", "Acesso, retificação, apagamento, limitação, oposição e portabilidade dos dados", "Nenhum direito especial"],
+        options: ["Apenas o direito de acesso", "Acesso, retificação/apagamento/bloqueio e entrega de dados", "Acesso, retificação, apagamento, limitação, oposição e portabilidade dos dados (como o RGPD da UE)"],
         correctIndexes: [1],
-        explanation: "O DSG reconhece aos titulares a totalidade dos seis direitos mencionados.",
+        explanation: "O DSG suíço prevê o direito de acesso (art. 25), retificação/apagamento/bloqueio (art. 32) e entrega de dados (art. 28). O DSG suíço não prevê um direito de oposição ou limitação explícito como o RGPD da UE.",
       },
       {
         question: "Em que prazo deve ser concedido o acesso?",

@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Pozor",
-          text: "Čak i nenamjerne povrede mogu dovesti do novčanih kazni do CHF 250.000 — neznanje zakona ne štiti od sankcija.",
+          text: "Namjerne povrede od strane fizičkih osoba mogu dovesti do novčanih kazni do CHF 250.000 (čl. 60–63 DSG). Neznanje zakona ne štiti od sankcija.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Ispravak — pogođene osobe mogu zatražiti ispravak netočnih podataka. Brisanje — mogu zatražiti brisanje ako podaci više nisu potrebni ili su obrađivani nezakonito.",
       },
       {
-        heading: "Pravo na ograničenje obrade",
-        text: "Pogođene osobe mogu zatražiti da se njihovi podaci obrađuju samo na ograničen način — na primjer ako osporavaju njihovu točnost.",
+        heading: "Pravo na blokiranje podataka",
+        text: "Pogođene osobe mogu zatražiti blokiranje svojih podataka — na primjer ako osporavaju njihovu točnost ili ako obrada nije zakonita (iz prava na zaštitu osobnosti, čl. 32 DSG).",
       },
       {
-        heading: "Pravo na prigovor i prenosivost podataka",
-        text: "Prigovor — pogođene osobe mogu uložiti prigovor na obradu zbog razloga koji se odnose na njihovu konkretnu situaciju. Prenosivost — mogu zatražiti da se njihovi podaci prenesu u strukturiranom, uobičajeno korištenom i strojno čitljivom formatu.",
+        heading: "Izdavanje podataka (čl. 28 DSG)",
+        text: "Pogođene osobe mogu zatražiti predaju svojih podataka u uobičajenom elektroničkom formatu — pod uvjetom da se podaci automatski obrađuju i da to svrha dopušta.",
         infoBox: {
           variant: "merksatz",
-          title: "Šest prava",
-          text: "Pristup, ispravak, brisanje, ograničenje obrade, prigovor i prenosivost podataka.",
+          title: "Temeljna prava prema švicarskom DSG-u",
+          text: "Pravo na pristup (čl. 25), ispravak/brisanje/blokiranje (čl. 32) i izdavanje podataka (čl. 28). Švicarski DSG ne predviđa izričito pravo na prigovor poput GDPR-a EU-a.",
         },
       },
     ],
     quiz: [
       {
-        question: "Koja prava imaju pogođene osobe u pogledu svojih podataka?",
+        question: "Koja prava predviđa švicarski DSG za pogođene osobe?",
         type: "single",
-        options: ["Samo pravo na pristup", "Pristup, ispravak, brisanje, ograničenje obrade, prigovor i prenosivost podataka", "Nikakva posebna prava"],
+        options: ["Samo pravo na pristup", "Pristup, ispravak/brisanje/blokiranje i izdavanje podataka", "Pristup, ispravak, brisanje, ograničenje obrade, prigovor i prenosivost podataka (kao GDPR EU-a)"],
         correctIndexes: [1],
-        explanation: "DSG pogođenim osobama dodjeljuje svih šest navedenih prava.",
+        explanation: "Švicarski DSG predviđa pravo na pristup (čl. 25), ispravak/brisanje/blokiranje (čl. 32) i izdavanje podataka (čl. 28). Švicarski DSG ne predviđa izričito pravo na prigovor ili ograničenje poput GDPR-a EU-a.",
       },
       {
         question: "U kojem roku mora biti odobren pristup?",

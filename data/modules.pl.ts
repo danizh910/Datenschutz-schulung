@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Uwaga",
-          text: "Nawet nieumyślne naruszenia mogą skutkować karami do CHF 250 000 — nieznajomość prawa nie chroni przed sankcjami.",
+          text: "Umyślne naruszenia przez osoby fizyczne mogą skutkować karami do CHF 250 000 (art. 60–63 DSG). Nieznajomość prawa nie chroni przed sankcjami.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Sprostowanie — osoby, których dane dotyczą, mogą wnioskować o poprawienie nieprawidłowych danych. Usunięcie — mogą wnioskować o usunięcie, jeżeli dane nie są już potrzebne lub były przetwarzane niezgodnie z prawem.",
       },
       {
-        heading: "Prawo do ograniczenia przetwarzania",
-        text: "Osoby, których dane dotyczą, mogą wnioskować o ograniczenie przetwarzania ich danych — na przykład jeżeli kwestionują ich prawidłowość.",
+        heading: "Prawo do zablokowania danych",
+        text: "Osoby, których dane dotyczą, mogą wnioskować o zablokowanie swoich danych — na przykład jeżeli kwestionują ich prawidłowość lub jeżeli przetwarzanie jest niezgodne z prawem (wywodzi się z ochrony dóbr osobistych, art. 32 DSG).",
       },
       {
-        heading: "Prawo do sprzeciwu i przenoszalność danych",
-        text: "Sprzeciw — osoby, których dane dotyczą, mogą wnieść sprzeciw wobec przetwarzania z powodów związanych z ich szczególną sytuacją. Przenoszalność — mogą wnioskować o przekazanie ich danych w ustrukturyzowanym, powszechnie używanym i nadającym się do odczytu maszynowego formacie.",
+        heading: "Wydanie danych (art. 28 DSG)",
+        text: "Osoby, których dane dotyczą, mogą wnioskować o wydanie swoich danych w powszechnie używanym formacie elektronicznym — pod warunkiem że dane są przetwarzane automatycznie i cel na to pozwala.",
         infoBox: {
           variant: "merksatz",
-          title: "Sześć praw",
-          text: "Dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, sprzeciw i przenoszalność danych.",
+          title: "Główne prawa wynikające ze szwajcarskiego DSG",
+          text: "Prawo dostępu (art. 25), sprostowanie/usunięcie/zablokowanie (art. 32) i wydanie danych (art. 28). Szwajcarski DSG nie przewiduje wyraźnego prawa do sprzeciwu jak RODO UE.",
         },
       },
     ],
     quiz: [
       {
-        question: "Jakie prawa mają osoby, których dane dotyczą, w odniesieniu do swoich danych?",
+        question: "Jakie prawa przewiduje szwajcarski DSG dla osób, których dane dotyczą?",
         type: "single",
-        options: ["Wyłącznie prawo dostępu", "Dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, sprzeciw i przenoszalność danych", "Żadnych szczególnych praw"],
+        options: ["Wyłącznie prawo dostępu", "Dostęp, sprostowanie/usunięcie/zablokowanie i wydanie danych", "Dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, sprzeciw i przenoszalność danych (jak RODO UE)"],
         correctIndexes: [1],
-        explanation: "DSG przyznaje osobom, których dane dotyczą, wszystkie sześć wymienionych praw.",
+        explanation: "Szwajcarski DSG przyznaje prawo dostępu (art. 25), sprostowanie/usunięcie/zablokowanie (art. 32) i wydanie danych (art. 28). Szwajcarski DSG nie przewiduje wyraźnego prawa do sprzeciwu ani ograniczenia jak RODO UE.",
       },
       {
         question: "W jakim terminie należy udzielić dostępu?",

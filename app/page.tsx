@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { BookOpen, Clock, Award } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { BookOpen, Clock, Award, ChevronDown } from 'lucide-react';
 import Surface, { ClayButton } from '@/components/Surface';
 import Waechter from '@/components/Waechter';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
@@ -16,6 +16,7 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [focused, setFocused] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
   const router = useRouter();
   const isDesktop = useIsDesktop();
   const t = useTranslation();
@@ -153,18 +154,22 @@ export default function LandingPage() {
 
             <form onSubmit={handleStart} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div>
-                <label style={{
-                  display: 'block',
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: 'var(--text-muted)',
-                  marginBottom: 7,
-                  letterSpacing: '0.5px',
-                  textTransform: 'uppercase',
-                }}>
+                <label
+                  htmlFor="userName"
+                  style={{
+                    display: 'block',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: 'var(--text-muted)',
+                    marginBottom: 7,
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                  }}
+                >
                   {t.landing.labelName}
                 </label>
                 <input
+                  id="userName"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -189,7 +194,7 @@ export default function LandingPage() {
                   }}
                 />
                 {error && (
-                  <p style={{ marginTop: 6, fontSize: 12, color: 'var(--red)', fontWeight: 600 }}>
+                  <p role="alert" style={{ marginTop: 6, fontSize: 12, color: 'var(--red)', fontWeight: 600 }}>
                     {error}
                   </p>
                 )}
@@ -202,6 +207,50 @@ export default function LandingPage() {
               >
                 {loading ? t.landing.btnStarting : t.landing.btnStart}
               </ClayButton>
+
+              {/* Privacy toggle */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setPrivacyOpen((o) => !o)}
+                  aria-expanded={privacyOpen}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 4,
+                    background: 'none', border: 'none', padding: 0,
+                    fontSize: 11, fontWeight: 600, color: 'var(--text-muted)',
+                    cursor: 'pointer', width: '100%', justifyContent: 'center',
+                  }}
+                >
+                  {t.landing.privacyToggle}
+                  <ChevronDown
+                    size={13}
+                    strokeWidth={2.5}
+                    style={{ transition: 'transform 0.2s', transform: privacyOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
+                </button>
+                <AnimatePresence>
+                  {privacyOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.22 }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <p style={{
+                        marginTop: 8, padding: '10px 12px',
+                        background: 'var(--surface-soft)',
+                        borderRadius: 10,
+                        fontSize: 11, color: 'var(--text-muted)',
+                        lineHeight: 1.6, margin: '8px 0 0',
+                        border: '1px solid var(--border-soft)',
+                      }}>
+                        {t.landing.privacyNotice}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               <p style={{
                 textAlign: 'center',

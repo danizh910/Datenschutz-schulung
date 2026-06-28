@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: 'warnung',
           title: 'Achtung',
-          text: 'Auch unabsichtliche Verstösse können zu Bussen von bis zu CHF 250\'000 führen – Unwissenheit schützt nicht vor Strafe.',
+          text: 'Vorsätzliche Verstösse durch natürliche Personen können zu Bussen von bis zu CHF 250\'000 führen (Art. 60–63 DSG). Unwissenheit schützt nicht vor Strafe.',
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: 'Berichtigung – Betroffene können die Korrektur unrichtiger Daten verlangen. Löschung – sie können die Löschung verlangen, wenn die Daten nicht mehr nötig sind oder unrechtmässig verarbeitet wurden.',
       },
       {
-        heading: 'Recht auf Einschränkung der Verarbeitung',
-        text: 'Betroffene können verlangen, dass ihre Daten nur noch eingeschränkt verarbeitet werden – etwa wenn sie die Richtigkeit bestreiten.',
+        heading: 'Recht auf Sperrung der Daten',
+        text: 'Betroffene können verlangen, dass ihre Daten gesperrt werden – etwa wenn deren Richtigkeit bestritten wird oder die Verarbeitung nicht rechtmässig ist (aus dem Persönlichkeitsschutz, Art. 32 DSG).',
       },
       {
-        heading: 'Widerspruchsrecht und Datenübertragbarkeit',
-        text: 'Widerspruch – Betroffene können der Verarbeitung aus Gründen ihrer besonderen Situation widersprechen. Datenübertragbarkeit – sie können verlangen, dass ihre Daten in einem strukturierten, gängigen und maschinenlesbaren Format übermittelt werden.',
+        heading: 'Datenherausgabe (Art. 28 DSG)',
+        text: 'Betroffene können verlangen, dass ihre Daten in einem gängigen elektronischen Format herausgegeben werden – sofern die Daten automatisiert bearbeitet werden und der Zweck es erlaubt.',
         infoBox: {
           variant: 'merksatz',
-          title: 'Die sechs Rechte',
-          text: 'Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenübertragbarkeit.',
+          title: 'Zentrale Rechte nach Schweizer DSG',
+          text: 'Auskunftsrecht (Art. 25), Berichtigung/Löschung/Sperrung (Art. 32) und Datenherausgabe (Art. 28). Das Schweizer DSG kennt kein explizites Widerspruchsrecht wie die EU-DSGVO.',
         },
       },
     ],
     quiz: [
       {
-        question: 'Welche Rechte haben betroffene Personen in Bezug auf ihre Daten?',
+        question: 'Welche Rechte sieht das Schweizer DSG für betroffene Personen vor?',
         type: 'single',
-        options: ['Nur das Recht auf Auskunft', 'Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenübertragbarkeit', 'Keine besonderen Rechte'],
+        options: ['Nur das Recht auf Auskunft', 'Auskunft, Berichtigung/Löschung/Sperrung und Datenherausgabe', 'Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenübertragbarkeit (wie die EU-DSGVO)'],
         correctIndexes: [1],
-        explanation: 'Das DSG gibt Betroffenen alle sechs genannten Rechte.',
+        explanation: 'Das Schweizer DSG kennt Auskunftsrecht (Art. 25), Berichtigung/Löschung/Sperrung (Art. 32) und Datenherausgabe (Art. 28). Ein explizites Widerspruchsrecht oder Recht auf Einschränkung wie in der EU-DSGVO gibt es im Schweizer DSG nicht ausdrücklich.',
       },
       {
         question: 'Innerhalb welcher Frist muss eine Auskunft bereitgestellt werden?',

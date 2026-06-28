@@ -14,7 +14,7 @@ export const modules: Module[] = [
         infoBox: {
           variant: "warnung",
           title: "Pozor",
-          text: "I neúmyslná porušení mohou vést k pokutám až CHF 250 000 — neznalost zákona neomlouvá.",
+          text: "Úmyslná porušení ze strany fyzických osob mohou vést k pokutám až CHF 250 000 (čl. 60–63 DSG). Neznalost zákona neomlouvá.",
         },
       },
       {
@@ -113,26 +113,26 @@ export const modules: Module[] = [
         text: "Oprava — dotčené osoby mohou požádat o opravu nepřesných údajů. Výmaz — mohou požádat o vymazání, pokud údaje již nejsou potřebné nebo byly zpracovávány protiprávně.",
       },
       {
-        heading: "Právo na omezení zpracování",
-        text: "Dotčené osoby mohou požádat, aby jejich údaje byly zpracovávány pouze omezeně — například pokud zpochybňují jejich přesnost.",
+        heading: "Právo na blokování údajů",
+        text: "Dotčené osoby mohou požádat o blokování svých údajů — například pokud zpochybňují jejich přesnost nebo pokud zpracování není zákonné (z ochrany osobnosti, čl. 32 DSG).",
       },
       {
-        heading: "Právo vznést námitku a přenositelnost dat",
-        text: "Námitka — dotčené osoby mohou vznést námitku proti zpracování z důvodů týkajících se jejich konkrétní situace. Přenositelnost — mohou požádat, aby jejich údaje byly předány ve strukturovaném, běžně používaném a strojově čitelném formátu.",
+        heading: "Vydání údajů (čl. 28 DSG)",
+        text: "Dotčené osoby mohou požádat o vydání svých údajů v běžném elektronickém formátu — za předpokladu, že jsou údaje zpracovávány automaticky a účel to dovoluje.",
         infoBox: {
           variant: "merksatz",
-          title: "Šest práv",
-          text: "Přístup, oprava, výmaz, omezení zpracování, námitka a přenositelnost dat.",
+          title: "Klíčová práva podle švýcarského DSG",
+          text: "Právo na přístup (čl. 25), oprava/výmaz/blokování (čl. 32) a vydání údajů (čl. 28). Švýcarský DSG nezná výslovné právo vznést námitku jako GDPR EU.",
         },
       },
     ],
     quiz: [
       {
-        question: "Jaká práva mají dotčené osoby ve vztahu ke svým údajům?",
+        question: "Jaká práva předpokládá švýcarský DSG pro dotčené osoby?",
         type: "single",
-        options: ["Pouze právo na přístup", "Přístup, oprava, výmaz, omezení zpracování, námitka a přenositelnost dat", "Žádná zvláštní práva"],
+        options: ["Pouze právo na přístup", "Přístup, oprava/výmaz/blokování a vydání údajů", "Přístup, oprava, výmaz, omezení zpracování, námitka a přenositelnost dat (jako GDPR EU)"],
         correctIndexes: [1],
-        explanation: "DSG přiznává dotčeným osobám všech šest uvedených práv.",
+        explanation: "Švýcarský DSG zaručuje právo na přístup (čl. 25), opravu/výmaz/blokování (čl. 32) a vydání údajů (čl. 28). Švýcarský DSG nezná výslovné právo vznést námitku ani omezení jako GDPR EU.",
       },
       {
         question: "Ve jaké lhůtě musí být přístup poskytnut?",
